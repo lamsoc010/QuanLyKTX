@@ -90,7 +90,7 @@ public class ThietBiDao {
             ps.setString(6, df.format(tB.getNgayBanGiao()));
             ps.setString(7, df.format(tB.getNgayKiemTra()));
             ps.setInt(8, tB.getMaPhong());
-            ps.setString(19, tB.getMaQL());
+            ps.setString(9, tB.getMaQL());
             
             int rs = ps.executeUpdate();
         } catch (SQLException ex) {
@@ -101,7 +101,7 @@ public class ThietBiDao {
     public void updateThietBi(ThietBi tB) {
         conn = JDBCConnection.getJDBCConnection();
         String sql = "UPDATE THIETBI SET TENTB = ?, SOLUONG = ?, TINHTRANG = ?, GHICHU = ?, NGAYBANGIAO = ?, NGAYKIEMTRA = ?, MAQL = ?"
-                + "WHERE MATB = ?";
+                + " WHERE MATB = ?";
         try {
             PreparedStatement ps = conn.prepareStatement(sql);
             ps.setString(1, tB.getTenTB());

@@ -33,7 +33,9 @@ public class VatTuPhongJframe extends javax.swing.JFrame {
      */
     public VatTuPhongJframe() {
         initComponents();
+        
         thietBiService = new ThietBiService();
+        
         listTB = thietBiService.getAllThietBis();
         setTableTB();
         
@@ -182,6 +184,11 @@ public class VatTuPhongJframe extends javax.swing.JFrame {
         });
 
         capNhapTBButton.setText("Cập Nhập");
+        capNhapTBButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                capNhapTBButtonActionPerformed(evt);
+            }
+        });
 
         xoaTBButton.setText("Xoá");
 
@@ -423,7 +430,36 @@ public class VatTuPhongJframe extends javax.swing.JFrame {
         tB.setMaQL(maQL);
         
         thietBiService.insertThietBi(tB);
+        JOptionPane.showMessageDialog(rootPane, "Thành Công");
     }//GEN-LAST:event_themTBButtonActionPerformed
+
+    private void capNhapTBButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_capNhapTBButtonActionPerformed
+        // TODO add your handling code here:
+        int confirm = JOptionPane.showConfirmDialog(rootPane, "Bạn có chắc chắn muốn sửa không?");
+        if(confirm == JOptionPane.YES_OPTION) {
+            String maTB = maTBTF.getText();
+            String tenTB = tenTBTF.getText();
+            int soLuong = Integer.parseInt(String.valueOf(soLuongTBSp.getValue()));
+            String tinhTrang = String.valueOf(tinhTrangTBCbb.getSelectedItem());
+            String ghiChu = ghiChuTBTA.getText();
+            Date ngayBanGiao = ngayBanGiaoDC.getDate();
+            Date ngayKiemTra = ngayKiemTraDC.getDate();
+            int maPhong = Integer.parseInt(String.valueOf(maPhongTBCbb.getSelectedItem()));
+            String maQL = maQLTBTF.getText();
+
+            tB = new ThietBi();
+            tB.setMaTB(maTB);
+            tB.setTenTB(tenTB);
+            tB.setSoLuong(soLuong);
+            tB.setTinhTrang(tinhTrang);
+            tB.setGhiChu(ghiChu);
+            tB.setNgayBanGiao(ngayBanGiao);
+            tB.setNgayKiemTra(ngayKiemTra);
+            tB.setMaQL(maQL);
+            
+            thietBiService.updateThietBi(tB);
+        }
+    }//GEN-LAST:event_capNhapTBButtonActionPerformed
 
     /**
      * @param args the command line arguments

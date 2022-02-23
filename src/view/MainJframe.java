@@ -35,6 +35,7 @@ import javax.swing.SpinnerModel;
 import javax.swing.SpinnerNumberModel;
 import javax.swing.filechooser.FileNameExtensionFilter;
 import javax.swing.table.DefaultTableModel;
+import javax.swing.table.TableRowSorter;
 import modal.ChuyenPhong;
 import modal.KyLuat;
 import modal.Phong;
@@ -133,6 +134,7 @@ public class MainJframe extends javax.swing.JFrame {
         choThueLaiButton.setVisible(false);
 
         setVisibleSearch(false);
+        SoftByHeaderColumn();
     }
 
     /**
@@ -2688,6 +2690,21 @@ public class MainJframe extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    private void SoftByHeaderColumn() {
+        TableRowSorter<DefaultTableModel> sorterSV = new TableRowSorter<DefaultTableModel>(defaultSVModel);
+        sinhVienTable.setRowSorter(sorterSV);
+        TableRowSorter<DefaultTableModel> sorterP = new TableRowSorter<DefaultTableModel>(defaultPModel);
+        phongTable.setRowSorter(sorterP);
+        TableRowSorter<DefaultTableModel> sorterTP = new TableRowSorter<DefaultTableModel>(defaultTPModel);
+        thuePhongTable.setRowSorter(sorterTP);
+        TableRowSorter<DefaultTableModel> sorterCP = new TableRowSorter<DefaultTableModel>(defaultCPModel);
+        chuyenPhongTable.setRowSorter(sorterCP);
+        TableRowSorter<DefaultTableModel> sorterKL = new TableRowSorter<DefaultTableModel>(defaultKLModel);
+        kyLuatTable.setRowSorter(sorterKL);
+        TableRowSorter<DefaultTableModel> sorterTraP = new TableRowSorter<DefaultTableModel>(defaultTraPModel);
+        traPhongTable.setRowSorter(sorterTraP);
+    }
+    
     private void callListData() {
         phongService = new PhongService();
         p = new Phong();
