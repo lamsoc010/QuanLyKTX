@@ -29,29 +29,10 @@ public class SelectColumnTable extends javax.swing.JFrame {
      */
     public SelectColumnTable() {
         initComponents();
-        defaultTableModel = new DefaultTableModel();
-        tableSV.setModel(defaultTableModel);
-        
-        defaultTableModel.addColumn("a");
-        defaultTableModel.addColumn("b");
-        defaultTableModel.addColumn("c");
-        defaultTableModel.addColumn("d");
-
-        defaultTableModel.addRow(new Object[]{
-            "40","2","b"
-        });
-        defaultTableModel.addRow(new Object[]{
-            "80","g","c"
-        });
-        defaultTableModel.addRow(new Object[]{
-            "160","a","a"
-        });
-//        table = new JTable(defaultTableModel);
-//        header = table.getTableHeader();
-        
-        sorter = new TableRowSorter<DefaultTableModel>(defaultTableModel);
-        tableSV.setRowSorter(sorter);
-//        getContentPane().add(new JScrollPane(scroll));
+        int test = 01;
+        test = Integer.parseInt("0" + ++test);
+        System.out.println(test);
+        find.setText("" + test);
     }
 
     /**

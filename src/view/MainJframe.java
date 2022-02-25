@@ -4176,7 +4176,6 @@ public class MainJframe extends javax.swing.JFrame {
                 + "	GROUP BY NGAYVIPHAM";
         thongKeThuePhong(sql);
         thongKeKyLuat(sqlKL);
-
     }//GEN-LAST:event_namTKCbbActionPerformed
 
     private void suaTraPButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_suaTraPButtonActionPerformed

@@ -299,8 +299,12 @@ public class FormLoginJframe extends javax.swing.JFrame {
         }
         if (isSucces == true) {
             JOptionPane.showMessageDialog(rootPane, "Đăng nhập thành công!");
-            new MainJframe(userName).setVisible(true);
-            this.dispose();
+                this.dispose();
+            if(userName.equals("admin")) {
+                new DoanhThuJframe().setVisible(true);
+            } else {
+                new MainJframe(userName).setVisible(true);
+            }    
         } else {
             JOptionPane.showMessageDialog(rootPane, "Bạn đã nhập sai tài khoản hoặc mật khẩu!", "Thông báo lỗi", JOptionPane.ERROR_MESSAGE);
         }

@@ -44,6 +44,7 @@ public class VatTuPhongJframe extends javax.swing.JFrame {
         listP.forEach(p -> {
             maPhongTBCbb.addItem(p.getMaPhong());
         });
+        System.out.println("Test thay đổi");
     }
     private void setTableTB() {
         defaultTBModel = new DefaultTableModel() {
@@ -135,7 +136,7 @@ public class VatTuPhongJframe extends javax.swing.JFrame {
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(364, 364, 364)
+                .addGap(368, 368, 368)
                 .addComponent(jLabel1)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
