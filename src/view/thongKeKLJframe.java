@@ -13,10 +13,10 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
-import modal.KyLuat;
-import modal.QuanLy;
-import service.KyLuatService;
-import service.QuanLyService;
+import BEANS.KyLuat;
+import BEANS.QuanLy;
+import Controller.KyLuatService;
+import Controller.QuanLyService;
 
 /**
  *

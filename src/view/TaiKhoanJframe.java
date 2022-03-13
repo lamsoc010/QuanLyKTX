@@ -11,8 +11,8 @@ import javax.swing.ImageIcon;
 import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
 import javax.swing.filechooser.FileNameExtensionFilter;
-import modal.QuanLy;
-import service.QuanLyService;
+import BEANS.QuanLy;
+import Controller.QuanLyService;
 
 /**
  *

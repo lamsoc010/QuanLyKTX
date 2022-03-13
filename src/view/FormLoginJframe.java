@@ -8,8 +8,8 @@ import java.awt.Color;
 import java.awt.event.KeyEvent;
 import java.util.List;
 import javax.swing.JOptionPane;
-import modal.QuanLy;
-import service.QuanLyService;
+import BEANS.QuanLy;
+import Controller.QuanLyService;
 
 /**
  *

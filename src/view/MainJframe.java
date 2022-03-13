@@ -36,16 +36,18 @@ import javax.swing.SpinnerNumberModel;
 import javax.swing.filechooser.FileNameExtensionFilter;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableRowSorter;
-import modal.ChuyenPhong;
-import modal.KyLuat;
-import modal.Phong;
-import modal.QuanLy;
-import modal.SinhVien;
-import modal.ThongKeKL;
-import modal.ThongKeSV;
-import modal.ThuePhong;
-import modal.TraPhong;
+import BEANS.ChuyenPhong;
+import BEANS.KyLuat;
+import BEANS.Phong;
+import BEANS.QuanLy;
+import BEANS.SinhVien;
+import BEANS.ThongKeKL;
+import BEANS.ThongKeSV;
+import BEANS.ThuePhong;
+import BEANS.TraPhong;
+import org.apache.poi.ss.usermodel.CellStyle;
 import org.apache.poi.ss.usermodel.CellType;
+import org.apache.poi.ss.usermodel.Font;
 import org.apache.poi.xssf.usermodel.XSSFCell;
 import org.apache.poi.xssf.usermodel.XSSFRow;
 import org.apache.poi.xssf.usermodel.XSSFSheet;
@@ -56,13 +58,14 @@ import org.jfree.chart.JFreeChart;
 import org.jfree.chart.plot.CategoryPlot;
 import org.jfree.chart.plot.PlotOrientation;
 import org.jfree.data.category.DefaultCategoryDataset;
-import service.ChuyenPhongService;
-import service.KyLuatService;
-import service.PhongService;
-import service.QuanLyService;
-import service.SinhVienService;
-import service.ThuePhongService;
-import service.TraPhongService;
+import Controller.ChuyenPhongService;
+import Controller.KyLuatService;
+import Controller.PhongService;
+import Controller.QuanLyService;
+import Controller.SinhVienService;
+import Controller.ThuePhongService;
+import Controller.TraPhongService;
+import javax.swing.table.TableColumnModel;
 
 /**
  *
@@ -1581,10 +1584,10 @@ public class MainJframe extends javax.swing.JFrame {
                         .addComponent(jLabel25)
                         .addGap(18, 18, 18)))
                 .addGroup(jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(themKyLuatButton, javax.swing.GroupLayout.DEFAULT_SIZE, 186, Short.MAX_VALUE)
-                    .addComponent(ngayViPhamDC, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(ngayViPhamDC, javax.swing.GroupLayout.DEFAULT_SIZE, 186, Short.MAX_VALUE)
                     .addComponent(loaiKLCbb, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(maPhieuKLTF))
+                    .addComponent(maPhieuKLTF)
+                    .addComponent(themKyLuatButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addGap(18, 18, 18)
                 .addGroup(jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel22)
@@ -1642,7 +1645,7 @@ public class MainJframe extends javax.swing.JFrame {
                         .addComponent(suaKLButton)
                         .addComponent(luuLaiKLButton))
                     .addComponent(themKyLuatButton))
-                .addContainerGap(36, Short.MAX_VALUE))
+                .addContainerGap(54, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout jPanel6Layout = new javax.swing.GroupLayout(jPanel6);
@@ -2733,6 +2736,7 @@ public class MainJframe extends javax.swing.JFrame {
                 return false;
             }
         };
+        
 
         sinhVienTable.setModel(defaultSVModel);
         defaultSVModel.addColumn("Mã SV");
@@ -2746,6 +2750,12 @@ public class MainJframe extends javax.swing.JFrame {
         defaultSVModel.addColumn("Ngày Vào");
         defaultSVModel.addColumn("Mã Phòng");
         defaultSVModel.addColumn("Vi Phạm");
+        
+        TableColumnModel colModel = sinhVienTable.getColumnModel();
+
+        colModel.getColumn(0).setPreferredWidth(50);
+        colModel.getColumn(1).setPreferredWidth(120);
+        colModel.getColumn(4).setPreferredWidth(120);
 
         setDataSV(sinhVienService.getAllSinhViens());
     }
@@ -2845,7 +2855,11 @@ public class MainJframe extends javax.swing.JFrame {
         defaultKLModel.addColumn("Mã SV");
         defaultKLModel.addColumn("Mã QL");
         defaultKLModel.addColumn("Ngày Vi Phạm");
+        TableColumnModel colModel = kyLuatTable.getColumnModel();
 
+        colModel.getColumn(0).setPreferredWidth(40);
+        colModel.getColumn(1).setPreferredWidth(40);
+        colModel.getColumn(2).setPreferredWidth(150);
         setDataKL(kyLuatService.getAllKyLuats());
     }
 
@@ -2947,7 +2961,7 @@ public class MainJframe extends javax.swing.JFrame {
         for (Phong p : listPhong) {
             dataSet.setValue(p.getSoNguoi(), "Số Sinh Viên", "" + p.getMaPhong());
         }
-        JFreeChart chart = ChartFactory.createBarChart("Số SV trong phòng", "Mã Phòng", "Số SV", dataSet, PlotOrientation.VERTICAL, false, true, false);
+        JFreeChart chart = ChartFactory.createBarChart("Số SV trong phòng", "Mã Phòng", "Số SV", dataSet, PlotOrientation.VERTICAL, true, true, true);
         CategoryPlot p = chart.getCategoryPlot();
         p.setRangeGridlinePaint(Color.PINK);
         ChartPanel chartPanel = new ChartPanel(chart);
@@ -2965,9 +2979,9 @@ public class MainJframe extends javax.swing.JFrame {
         listTK = thuePhongService.thongKeSVTP(sql);
         for (ThongKeSV tK : listTK) {
 //            if(tP.)
-            dataSet.setValue(tK.getSoSV(), "Số Sinh Viên", tK.getNgayVao());
+            dataSet.setValue(tK.getSoSV(), "Số Sinh Viên", tK.getNgayVao().toString().substring(tK.getNgayVao().toString().length() - 2));
         }
-        JFreeChart chart = ChartFactory.createBarChart("Số SV đã thuê phòng", "Ngày", "Số SV", dataSet, PlotOrientation.VERTICAL, false, true, false);
+        JFreeChart chart = ChartFactory.createBarChart("Số SV đã thuê phòng", "Ngày", "Số SV", dataSet, PlotOrientation.VERTICAL, true, true, true);
         CategoryPlot p = chart.getCategoryPlot();
         p.setRangeGridlinePaint(Color.PINK);
         ChartPanel chartPanel = new ChartPanel(chart);
@@ -2981,11 +2995,14 @@ public class MainJframe extends javax.swing.JFrame {
 
     private void thongKeKyLuat(String sql) {
         DefaultCategoryDataset dataSet = new DefaultCategoryDataset();
+        
+//        Đổ dữ liệu vào dataset thông qua list 
         listTKKL = kyLuatService.thongKeKLSV(sql);
         for (ThongKeKL kL : listTKKL) {
             dataSet.setValue(kL.getSoSV(), "Số Sinh Viên", kL.getNgayViPham());
         }
-        JFreeChart chart = ChartFactory.createBarChart("Số SV bị kỉ luật", "Ngày", "Số SV", dataSet, PlotOrientation.VERTICAL, false, true, false);
+        
+        JFreeChart chart = ChartFactory.createBarChart("Số SV bị kỉ luật", "Ngày", "Số SV", dataSet, PlotOrientation.VERTICAL, true, true, true);
         CategoryPlot p = chart.getCategoryPlot();
         p.setRangeGridlinePaint(Color.PINK);
         ChartPanel chartPanel = new ChartPanel(chart);
@@ -3234,7 +3251,8 @@ public class MainJframe extends javax.swing.JFrame {
             soNguoiSp.setValue(p.getSoNguoi());
             giaTienFT.setValue(p.getGiaTien());
 
-//            luuLaiPhongButton.setVisible(true);
+            luuLaiPhongButton.setVisible(false);
+            
         }
     }//GEN-LAST:event_phongTableMouseClicked
 
@@ -3559,7 +3577,7 @@ public class MainJframe extends javax.swing.JFrame {
             hinhThucPhatKLTA.setText(kL.getHinhThucPhat());
             maSVKLTF.setText(kL.getMaSV());
             maQLKLTF.setText(kL.getMaQL());
-
+            luuLaiKLButton.setVisible(false);
         }
     }//GEN-LAST:event_kyLuatTableMouseClicked
 
@@ -3756,6 +3774,7 @@ public class MainJframe extends javax.swing.JFrame {
             maPhongMoiCbb.setSelectedItem(cP.getMaPhongMoi());
             liDoCPTA.setText(cP.getLiDo());
             maSVCPFT.setEditable(false);
+            luuLaiCPButton.setVisible(false);
         }
     }//GEN-LAST:event_chuyenPhongTableMouseClicked
 
@@ -3797,6 +3816,7 @@ public class MainJframe extends javax.swing.JFrame {
             maPhongTraPTF.setText("" + traP.getMaPhong());
             liDoTraPTA.setText(traP.getLiDo());
             maSVTraPFT.setEditable(false);
+            luuLaiTraPButton.setVisible(false);
         }
     }//GEN-LAST:event_traPhongTableMouseClicked
 
@@ -4036,68 +4056,47 @@ public class MainJframe extends javax.swing.JFrame {
                 XSSFCell cell11;
                 XSSFCell cell12;
                 XSSFCell cell13;
-                row = sheet.createRow(0);
-                cell0 = row.createCell(0);
-                cell0.setCellValue("STT");
-                cell1 = row.createCell(1);
-                cell1.setCellValue("Mã SV");
-                cell2 = row.createCell(2);
-                cell2.setCellValue("Ảnh");
-                cell3 = row.createCell(3);
-                cell3.setCellValue("Họ Tên");
-                cell4 = row.createCell(4);
-                cell4.setCellValue("SDT");
-                cell5 = row.createCell(5);
-                cell5.setCellValue("Giới Tính");
-                cell6 = row.createCell(6);
-                cell6.setCellValue("Địa Chỉ");
-                cell7 = row.createCell(7);
-                cell7.setCellValue("Ngành Sinh");
-                cell8 = row.createCell(8);
-                cell8.setCellValue("Ngành");
-                cell9 = row.createCell(9);
-                cell9.setCellValue("Khoá");
-                cell10 = row.createCell(10);
-                cell10.setCellValue("Ngày Vào");
-                cell11 = row.createCell(11);
-                cell11.setCellValue("Mà Phòng");
-                cell12 = row.createCell(12);
-                cell12.setCellValue("Số Lần Vi Phạm");
-                cell13 = row.createCell(13);
-                cell13.setCellValue("Trạng Thái");
+//                Font font = wb.createFont();
+//                font.setBold(true);
+//                CellStyle cellStyle = wb.createCellStyle();
+//                cellStyle.setFont(font);
+                
+                row = sheet.createRow(1);
+                row.createCell(0).setCellValue("STT");
+//                row.createCell(0).setCellStyle(cellStyle);
+                
+                row.createCell(1).setCellValue("Mã SV");
+                row.createCell(2).setCellValue("Ảnh");
+                row.createCell(3).setCellValue("Họ Tên");
+                row.createCell(4).setCellValue("SDT");
+                row.createCell(5).setCellValue("Giới Tính");
+                row.createCell(6).setCellValue("Địa Chỉ");
+                row.createCell(7).setCellValue("Ngày Sinh");
+                row.createCell(8).setCellValue("Ngành");
+                row.createCell(9).setCellValue("Khoá");
+                row.createCell(10).setCellValue("Ngày Vào");
+                row.createCell(11).setCellValue("Mã Phòng");
+                row.createCell(12).setCellValue("Số Lần Vi Phạm");
+                row.createCell(13).setCellValue("Trạng Thái");
+//                
 
                 listSV = sinhVienService.getAllSinhViens();
-                for (int i = 0; i < listSV.size(); i++) {
+                for (int i = 1; i < listSV.size(); i++) {
                     row = sheet.createRow(i + 1);
-                    cell0 = row.createCell(0);
-                    cell0.setCellValue(i + 1);
-                    cell1 = row.createCell(1);
-                    cell1.setCellValue(listSV.get(i).getMaSV());
-                    cell2 = row.createCell(2);
-                    cell2.setCellValue(listSV.get(i).getAnh());
-                    cell3 = row.createCell(3);
-                    cell3.setCellValue(listSV.get(i).getHoTen());
-                    cell4 = row.createCell(4);
-                    cell4.setCellValue(listSV.get(i).getSdt());
-                    cell5 = row.createCell(5);
-                    cell5.setCellValue(listSV.get(i).getGioiTinh());
-                    cell6 = row.createCell(6);
-                    cell6.setCellValue(listSV.get(i).getDiaChi());
-                    cell7 = row.createCell(7);
-                    cell7.setCellValue(String.valueOf(listSV.get(i).getNgaySinh()));
-                    cell8 = row.createCell(8);
-                    cell8.setCellValue(listSV.get(i).getNganh());
-                    cell9 = row.createCell(9);
-                    cell9.setCellValue(listSV.get(i).getKhoa());
-                    cell10 = row.createCell(10);
-                    cell10.setCellValue(String.valueOf(listSV.get(i).getNgayVao()));
-                    cell11 = row.createCell(11);
-                    cell11.setCellValue(listSV.get(i).getMaPhong());
-                    cell12 = row.createCell(12);
-                    cell12.setCellValue(listSV.get(i).getSoLanViPham());
-                    cell13 = row.createCell(13);
-                    cell13.setCellValue(listSV.get(i).getTrangThai());
-
+                    row.createCell(0).setCellValue(i+1);
+                    row.createCell(1).setCellValue(listSV.get(i).getMaSV());
+                    row.createCell(2).setCellValue(listSV.get(i).getAnh());
+                    row.createCell(3).setCellValue(listSV.get(i).getHoTen());
+                    row.createCell(4).setCellValue(listSV.get(i).getSdt());
+                    row.createCell(5).setCellValue(listSV.get(i).getGioiTinh());
+                    row.createCell(6).setCellValue(listSV.get(i).getDiaChi());
+                    row.createCell(7).setCellValue(String.valueOf(listSV.get(i).getNgaySinh()));
+                    row.createCell(8).setCellValue(listSV.get(i).getNganh());
+                    row.createCell(9).setCellValue(listSV.get(i).getKhoa());
+                    row.createCell(10).setCellValue(String.valueOf(listSV.get(i).getNgayVao()));
+                    row.createCell(11).setCellValue(listSV.get(i).getMaPhong());
+                    row.createCell(12).setCellValue(listSV.get(i).getSoLanViPham());
+                    row.createCell(13).setCellValue(listSV.get(i).getTrangThai());
                 }
 
                 FileOutputStream file = new FileOutputStream("DanhSachSinhVien.xlsx");

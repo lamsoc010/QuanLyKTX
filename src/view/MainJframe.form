@@ -2208,10 +2208,10 @@
                                   </Group>
                               </Group>
                               <Group type="103" groupAlignment="0" attributes="0">
-                                  <Component id="themKyLuatButton" pref="186" max="32767" attributes="0"/>
-                                  <Component id="ngayViPhamDC" alignment="0" max="32767" attributes="0"/>
+                                  <Component id="ngayViPhamDC" alignment="0" pref="186" max="32767" attributes="0"/>
                                   <Component id="loaiKLCbb" alignment="0" max="32767" attributes="0"/>
                                   <Component id="maPhieuKLTF" alignment="0" max="32767" attributes="0"/>
+                                  <Component id="themKyLuatButton" alignment="0" max="32767" attributes="0"/>
                               </Group>
                               <EmptySpace type="separate" max="-2" attributes="0"/>
                               <Group type="103" groupAlignment="0" attributes="0">
@@ -2284,7 +2284,7 @@
                                   </Group>
                                   <Component id="themKyLuatButton" alignment="0" min="-2" max="-2" attributes="0"/>
                               </Group>
-                              <EmptySpace pref="36" max="32767" attributes="0"/>
+                              <EmptySpace pref="54" max="32767" attributes="0"/>
                           </Group>
                       </Group>
                     </DimensionLayout>

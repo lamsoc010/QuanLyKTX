@@ -5,8 +5,8 @@
 package view;
 
 import javax.swing.JOptionPane;
-import modal.QuanLy;
-import service.QuanLyService;
+import BEANS.QuanLy;
+import Controller.QuanLyService;
 
 /**
  *
