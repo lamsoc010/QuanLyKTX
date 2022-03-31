@@ -9,6 +9,7 @@ import java.awt.event.KeyEvent;
 import java.util.List;
 import javax.swing.JOptionPane;
 import BEANS.QuanLy;
+import Controller.CheckLogin;
 import Controller.QuanLyService;
 
 /**
@@ -16,7 +17,7 @@ import Controller.QuanLyService;
  * @author Admin
  */
 public class FormLoginJframe extends javax.swing.JFrame {
-
+    CheckLogin checkLogin;
     QuanLyService quanLyService;
     QuanLy qL;
     List<QuanLy> listQL;
@@ -27,6 +28,7 @@ public class FormLoginJframe extends javax.swing.JFrame {
     public FormLoginJframe() {
         initComponents();
         quanLyService = new QuanLyService();
+        checkLogin = new CheckLogin();
         listQL = quanLyService.getAllQuanLys();
 
     }
@@ -79,14 +81,14 @@ public class FormLoginJframe extends javax.swing.JFrame {
         jLabel2.setForeground(new java.awt.Color(0, 0, 102));
         jLabel2.setText("LOGIN");
 
-        jLabel3.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        jLabel3.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
         jLabel3.setForeground(new java.awt.Color(0, 0, 102));
         jLabel3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/User.png"))); // NOI18N
         jLabel3.setText("Username");
 
         usernameTF.setForeground(new java.awt.Color(0, 0, 102));
 
-        jLabel4.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        jLabel4.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
         jLabel4.setForeground(new java.awt.Color(0, 0, 102));
         jLabel4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/password1.png"))); // NOI18N
         jLabel4.setText("Password");
@@ -152,7 +154,7 @@ public class FormLoginJframe extends javax.swing.JFrame {
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                     .addComponent(jLabel4, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jLabel3, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(resetButton, javax.swing.GroupLayout.Alignment.LEADING))
+                    .addComponent(resetButton, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 105, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(36, 36, 36)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel3Layout.createSequentialGroup()
@@ -161,9 +163,9 @@ public class FormLoginJframe extends javax.swing.JFrame {
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
                         .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                             .addGroup(jPanel3Layout.createSequentialGroup()
-                                .addComponent(loginButton, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 42, Short.MAX_VALUE)
-                                .addComponent(cancelButton))
+                                .addComponent(loginButton, javax.swing.GroupLayout.PREFERRED_SIZE, 105, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 49, Short.MAX_VALUE)
+                                .addComponent(cancelButton, javax.swing.GroupLayout.PREFERRED_SIZE, 105, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addComponent(usernameTF, javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(passwordPF))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -289,25 +291,47 @@ public class FormLoginJframe extends javax.swing.JFrame {
         // TODO add your handling code here:
         String userName = usernameTF.getText();
         String passWord = String.valueOf(passwordPF.getPassword());
-        boolean isSucces = false;
-        for (int i = 0; i < listQL.size(); i++) {
-            if (listQL.get(i).getMaQL().equals(userName)) {
-                if (listQL.get(i).getMatKhau().equals(passWord)) {
-                    isSucces = true;
-                }
-            }
-        }
-        if (isSucces == true) {
-            JOptionPane.showMessageDialog(rootPane, "Đăng nhập thành công!");
-                this.dispose();
-            if(userName.equals("admin")) {
-                new DoanhThuJframe().setVisible(true);
-            } else {
-                new MainJframe(userName).setVisible(true);
-            }    
-        } else {
-            JOptionPane.showMessageDialog(rootPane, "Bạn đã nhập sai tài khoản hoặc mật khẩu!", "Thông báo lỗi", JOptionPane.ERROR_MESSAGE);
-        }
+//        boolean isSucces = false;
+//        boolean isOut = true;
+//        boolean isEmpty = true;
+//        for (int i = 0; i < listQL.size(); i++) {
+//            if(listQL.get(i).getMaQL().equals(userName)) {
+//                if(listQL.get(i).getTrangThai().equals("Đang làm")) {
+//                    if(listQL.get(i).getMatKhau().equalsIgnoreCase(passWord)) {
+//                        isSucces = true;
+//                    }
+//                    isOut = false;
+//                }
+//                isEmpty = false;
+//            }
+//            
+//        }
+//        if(!isOut) {
+//            if (isSucces == true) {
+//                JOptionPane.showMessageDialog(rootPane, "Đăng nhập thành công!");
+//                    this.dispose();
+//                if(userName.equals("admin")) {
+//                    new MainJframe(userName).setVisible(true);
+//                } else {
+//                    new MainJframe(userName).setVisible(true);
+//                }    
+//            } else {
+//                JOptionPane.showMessageDialog(rootPane, "Bạn đã nhập sai tài khoản hoặc mật khẩu!", "Thông báo lỗi", JOptionPane.ERROR_MESSAGE);
+//            }
+//        } else 
+//            JOptionPane.showMessageDialog(rootPane, "Nhân viên đã nghỉ việc", "Lỗi", JOptionPane.ERROR_MESSAGE);
+           if(checkLogin.checkUserNameEmpty(userName)) {
+               JOptionPane.showMessageDialog(rootPane, "Tài khoản không tồn tại", "Lỗi", JOptionPane.ERROR_MESSAGE);
+           } else if(checkLogin.checkUserNameOut(userName) == null) {
+               JOptionPane.showMessageDialog(rootPane, "Nhân viên này đã nghỉ", "Lỗi", JOptionPane.ERROR_MESSAGE);
+           } else if(!checkLogin.checkPassWord(userName, passWord)) {
+               JOptionPane.showMessageDialog(rootPane, "Nhập mật khẩu không đúng", "Lỗi", JOptionPane.ERROR_MESSAGE);
+           } else {
+               JOptionPane.showMessageDialog(rootPane, "Đăng nhập thành công!");
+               new MainJframe(userName).setVisible(true);
+               this.dispose();
+           }
+        
     }//GEN-LAST:event_loginButtonActionPerformed
 
 //    Sự kiện khi nhập password xong thì nhấn enter cái thì sẽ gọi thằng button login và gửi luôn

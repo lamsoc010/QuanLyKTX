@@ -9,12 +9,12 @@ package BEANS;
  * @author Admin
  */
 public class QuanLy {
-    String maQL, anh, hoTen, sdt, diaChi, phuTrach, matKhau;
+    String maQL, anh, hoTen, sdt, diaChi, phuTrach, matKhau, trangThai;
 
     public QuanLy() {
     }
 
-    public QuanLy(String maQL, String anh, String hoTen, String sdt, String diaChi, String phuTrach, String matKhau) {
+    public QuanLy(String maQL, String anh, String hoTen, String sdt, String diaChi, String phuTrach, String matKhau, String trangThai) {
         this.maQL = maQL;
         this.anh = anh;
         this.hoTen = hoTen;
@@ -22,10 +22,20 @@ public class QuanLy {
         this.diaChi = diaChi;
         this.phuTrach = phuTrach;
         this.matKhau = matKhau;
+        this.trangThai = trangThai;
     }
+
 
     public String getMaQL() {
         return maQL;
+    }
+
+    public String getTrangThai() {
+        return trangThai;
+    }
+
+    public void setTrangThai(String trangThai) {
+        this.trangThai = trangThai;
     }
 
     public void setMaQL(String maQL) {

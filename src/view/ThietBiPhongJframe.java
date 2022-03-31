@@ -16,6 +16,7 @@ import Controller.QuanLyThietBiService;
 import Controller.ThietBiService;
 import javax.swing.SpinnerModel;
 import javax.swing.SpinnerNumberModel;
+import javax.swing.table.TableRowSorter;
 
 /**
  *
@@ -23,29 +24,33 @@ import javax.swing.SpinnerNumberModel;
  */
 public class ThietBiPhongJframe extends javax.swing.JFrame {
 //    Thiết bị
+
     ThietBiService thietBiService;
     ThietBi tB;
     List<ThietBi> listTB;
-    
+
 //  Quản lý thiết bị
     QuanLyThietBiService quanLyThietBiService;
     QuanLyThietBi qLTB;
     List<QuanLyThietBi> listQLTB;
     DefaultTableModel defautQLTBModel;
-    
+
 //    Phòng:
     PhongService phongService;
     Phong p;
     List<Phong> listP;
+
+    String maQL;
+
     /**
      * Creates new form VatTuPhongJframe
      */
-    public ThietBiPhongJframe() {
+    public ThietBiPhongJframe(String maQL1) {
         initComponents();
-        
+
         thietBiService = new ThietBiService();
         quanLyThietBiService = new QuanLyThietBiService();
-        
+
         listTB = thietBiService.getAllThietBis();
         setTableTB();
         
@@ -54,13 +59,21 @@ public class ThietBiPhongJframe extends javax.swing.JFrame {
         listP.forEach(p -> {
             maPhongCbb.addItem(p.getMaPhong());
         });
-        listTB = thietBiService.getAllThietBis();
+
+        listQLTB = quanLyThietBiService.getAllQLTBs();
         listTB.forEach(tB -> {
-            maTBCbb.addItem(tB.getMaTB());
+            if (soLuongConLai(tB.getMaTB(), listQLTB) != 0) {
+                maTBCbb.addItem(tB.getMaTB());
+            }
         });
-        
+
         luuLaiButton.setVisible(false);
+        maQLTBTF.setText(maQL);
+        maQL = maQL1;
+        maQLTBTF.setText(maQL);
+
     }
+
     private void setTableTB() {
         defautQLTBModel = new DefaultTableModel() {
             @Override
@@ -68,7 +81,10 @@ public class ThietBiPhongJframe extends javax.swing.JFrame {
                 return false;
             }
         };
-        
+        TableRowSorter<DefaultTableModel> sorterTB = new TableRowSorter<DefaultTableModel>(defautQLTBModel);
+        thietBiTable.setRowSorter(sorterTB);
+
+
         thietBiTable.setModel(defautQLTBModel);
         defautQLTBModel.addColumn("Mã Phòng");
         defautQLTBModel.addColumn("Mã TB");
@@ -80,49 +96,49 @@ public class ThietBiPhongJframe extends javax.swing.JFrame {
         defautQLTBModel.addColumn("Ngày Kiểm Tra");
         defautQLTBModel.addColumn("Mã QL");
         defautQLTBModel.addColumn("Ghi Chú");
-        
+
         setAllDataTB(quanLyThietBiService.getAllQLTBs());
-        
+
     }
-    
-    private void setAllDataTB(List<QuanLyThietBi> listQLTB ) {
+
+    private void setAllDataTB(List<QuanLyThietBi> listQLTB) {
         defautQLTBModel.setRowCount(0);
         listQLTB.forEach(qLTB -> {
             tB = thietBiService.getTBByMaTB(qLTB.getMaTB());
-            defautQLTBModel.addRow(new Object[] {
-                qLTB.getMaPhong(), qLTB.getMaTB(),tB.getTenTB(), tB.getLoaiTB(), tB.getTinhTrang(), qLTB.getSoLuong(), qLTB.getNgayBanGiao(), qLTB.getNgayKiemTra(), qLTB.getMaQL(), qLTB.getGhiChu()
-            }); 
-            
+            defautQLTBModel.addRow(new Object[]{
+                qLTB.getMaPhong(), qLTB.getMaTB(), tB.getTenTB(), tB.getLoaiTB(), tB.getTinhTrang(), qLTB.getSoLuong(), qLTB.getNgayBanGiao(), qLTB.getNgayKiemTra(), qLTB.getMaQL(), qLTB.getGhiChu()
+            });
+
         });
     }
-    
+
     private void setDataTB(List<QuanLyThietBi> listQLTB, int maPhong) {
         defautQLTBModel.setRowCount(0);
         listQLTB.forEach(qLTB -> {
-            if(qLTB.getMaPhong() == maPhong) {
+            if (qLTB.getMaPhong() == maPhong) {
                 tB = thietBiService.getTBByMaTB(qLTB.getMaTB());
-                defautQLTBModel.addRow(new Object[] {
-                qLTB.getMaPhong(), qLTB.getMaTB(),tB.getTenTB(), tB.getLoaiTB(), tB.getTinhTrang(), qLTB.getSoLuong(), qLTB.getNgayBanGiao(), qLTB.getNgayKiemTra(), qLTB.getMaQL(), qLTB.getGhiChu()
-            }); 
+                defautQLTBModel.addRow(new Object[]{
+                    qLTB.getMaPhong(), qLTB.getMaTB(), tB.getTenTB(), tB.getLoaiTB(), tB.getTinhTrang(), qLTB.getSoLuong(), qLTB.getNgayBanGiao(), qLTB.getNgayKiemTra(), qLTB.getMaQL(), qLTB.getGhiChu()
+                });
             }
         });
     }
-    
+
     private int soLuongConLai(String maTB, List<QuanLyThietBi> listQLTB) {
         tB = thietBiService.getTBByMaTB(maTB);
         int soLuongTong = tB.getSoLuong();
-        
+
         listQLTB = quanLyThietBiService.getAllQLTBs();
         int soLuongDaDung = 0;
-        for(QuanLyThietBi qLTB : listQLTB) {
-            if(qLTB.getMaTB().equals(maTB)) {
+        for (QuanLyThietBi qLTB : listQLTB) {
+            if (qLTB.getMaTB().equals(maTB)) {
                 soLuongDaDung += qLTB.getSoLuong();
             }
         }
         int soLuongConLai = soLuongTong - soLuongDaDung;
         return soLuongConLai;
     }
-    
+
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -135,6 +151,7 @@ public class ThietBiPhongJframe extends javax.swing.JFrame {
         jButton1 = new javax.swing.JButton();
         jPanel1 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
+        quayLaiButton = new javax.swing.JButton();
         jSeparator1 = new javax.swing.JSeparator();
         jPanel2 = new javax.swing.JPanel();
         jPanel3 = new javax.swing.JPanel();
@@ -175,7 +192,7 @@ public class ThietBiPhongJframe extends javax.swing.JFrame {
         jToolBar1 = new javax.swing.JToolBar();
         chuyenTBButton = new javax.swing.JButton();
         jSeparator5 = new javax.swing.JToolBar.Separator();
-        jButton2 = new javax.swing.JButton();
+        themTBTongButton = new javax.swing.JButton();
 
         jButton1.setText("jButton1");
 
@@ -183,23 +200,38 @@ public class ThietBiPhongJframe extends javax.swing.JFrame {
 
         jLabel1.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
         jLabel1.setForeground(new java.awt.Color(0, 0, 102));
+        jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel1.setText("Quản lý thiết bị vật tư trong phòng");
+
+        quayLaiButton.setBackground(new java.awt.Color(0, 0, 102));
+        quayLaiButton.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
+        quayLaiButton.setForeground(new java.awt.Color(255, 255, 255));
+        quayLaiButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/Exit.png"))); // NOI18N
+        quayLaiButton.setText("Quay Lại");
+        quayLaiButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                quayLaiButtonActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(291, 291, 291)
-                .addComponent(jLabel1)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(quayLaiButton)
+                .addContainerGap())
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jLabel1)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel1)
+                    .addComponent(quayLaiButton))
+                .addContainerGap(15, Short.MAX_VALUE))
         );
 
         jLabel2.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
@@ -289,6 +321,8 @@ public class ThietBiPhongJframe extends javax.swing.JFrame {
         jLabel10.setForeground(new java.awt.Color(0, 0, 102));
         jLabel10.setText("Mã QL:");
 
+        maQLTBTF.setEditable(false);
+
         jLabel11.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         jLabel11.setForeground(new java.awt.Color(0, 0, 102));
         jLabel11.setText("Loại TB:");
@@ -323,6 +357,8 @@ public class ThietBiPhongJframe extends javax.swing.JFrame {
         jLabel12.setForeground(new java.awt.Color(0, 0, 102));
         jLabel12.setText("SL Còn Lại:");
 
+        sLConLaiTF.setEditable(false);
+
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
         jPanel3Layout.setHorizontalGroup(
@@ -349,17 +385,13 @@ public class ThietBiPhongJframe extends javax.swing.JFrame {
                                 .addComponent(maTBCbb, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                         .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(jPanel3Layout.createSequentialGroup()
+                                .addGap(15, 15, 15)
+                                .addComponent(jLabel11)
+                                .addGap(35, 35, 35)
                                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addGroup(jPanel3Layout.createSequentialGroup()
-                                        .addGap(15, 15, 15)
-                                        .addComponent(jLabel11)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                        .addComponent(loaiTBCbb, javax.swing.GroupLayout.PREFERRED_SIZE, 99, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addGap(18, 18, 18))
-                                    .addGroup(jPanel3Layout.createSequentialGroup()
-                                        .addGap(93, 93, 93)
-                                        .addComponent(tinhTrangTBCbb, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addGap(17, 17, 17)))
+                                    .addComponent(loaiTBCbb, javax.swing.GroupLayout.PREFERRED_SIZE, 99, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(tinhTrangTBCbb, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 26, Short.MAX_VALUE)
                                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                                     .addComponent(jLabel10, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                     .addComponent(jLabel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
@@ -369,7 +401,7 @@ public class ThietBiPhongJframe extends javax.swing.JFrame {
                                 .addGap(18, 18, 18)
                                 .addComponent(sLConLaiTF, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(0, 0, Short.MAX_VALUE)))))
-                .addGap(5, 5, 5)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(soLuongTBSp)
                     .addComponent(maQLTBTF)
@@ -392,7 +424,7 @@ public class ThietBiPhongJframe extends javax.swing.JFrame {
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(refreshButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 179, Short.MAX_VALUE))
-                .addContainerGap(13, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addComponent(jSeparator3)
             .addComponent(jSeparator4)
         );
@@ -472,7 +504,7 @@ public class ThietBiPhongJframe extends javax.swing.JFrame {
         );
         jPanel4Layout.setVerticalGroup(
             jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 288, Short.MAX_VALUE)
+            .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 280, Short.MAX_VALUE)
         );
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
@@ -510,19 +542,19 @@ public class ThietBiPhongJframe extends javax.swing.JFrame {
         jToolBar1.add(chuyenTBButton);
         jToolBar1.add(jSeparator5);
 
-        jButton2.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
-        jButton2.setForeground(new java.awt.Color(0, 0, 102));
-        jButton2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/Add.png"))); // NOI18N
-        jButton2.setText("Thêm Thiết Bị");
-        jButton2.setFocusable(false);
-        jButton2.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
-        jButton2.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
-        jButton2.addActionListener(new java.awt.event.ActionListener() {
+        themTBTongButton.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
+        themTBTongButton.setForeground(new java.awt.Color(0, 0, 102));
+        themTBTongButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/Add.png"))); // NOI18N
+        themTBTongButton.setText("Thêm Thiết Bị");
+        themTBTongButton.setFocusable(false);
+        themTBTongButton.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        themTBTongButton.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        themTBTongButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton2ActionPerformed(evt);
+                themTBTongButtonActionPerformed(evt);
             }
         });
-        jToolBar1.add(jButton2);
+        jToolBar1.add(themTBTongButton);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -553,14 +585,14 @@ public class ThietBiPhongJframe extends javax.swing.JFrame {
         luuLaiButton.setVisible(false);
         loaiTBCbb.removeActionListener(loaiTBCbb);
         int row = thietBiTable.getSelectedRow();
-        if(row == -1) {
+        if (row == -1) {
             JOptionPane.showMessageDialog(rootPane, "Vui lòng chọn trường");
         } else {
             int maPhong = Integer.parseInt(String.valueOf(thietBiTable.getValueAt(row, 0)));
             String maTB = String.valueOf(thietBiTable.getValueAt(row, 1));
             tB = thietBiService.getTBByMaTB(maTB);
             qLTB = quanLyThietBiService.getQLTBByMaTB(maTB, maPhong);
-            
+
             maTBCbb.setSelectedItem(tB.getMaTB());
             tenTBTF.setText(tB.getTenTB());
             soLuongTBSp.setValue(qLTB.getSoLuong());
@@ -571,12 +603,12 @@ public class ThietBiPhongJframe extends javax.swing.JFrame {
             maPhongCbb.setSelectedItem(qLTB.getMaPhong());
             maQLTBTF.setText(qLTB.getMaQL());
             loaiTBCbb.setSelectedItem(tB.getLoaiTB());
-            
+
             tinhTrangTBCbb.setEnabled(true);
 //            Xét số lượng tối đa có thể sửa sau khi click
             int soLuongConLai = soLuongConLai(maTB, quanLyThietBiService.getAllQLTBs());
             SpinnerModel spinnerModel;
-            if(soLuongConLai == 0) {
+            if (soLuongConLai == 0) {
                 spinnerModel = new SpinnerNumberModel(qLTB.getSoLuong(), 1, qLTB.getSoLuong(), 1);
             } else {
                 spinnerModel = new SpinnerNumberModel(qLTB.getSoLuong(), 1, (qLTB.getSoLuong() + soLuongConLai), 1);
@@ -591,9 +623,9 @@ public class ThietBiPhongJframe extends javax.swing.JFrame {
         maTBCbbActionPerformed(evt);
         loaiTBCbb.setEnabled(false);
         String maTB = String.valueOf(maTBCbb.getSelectedItem());
-        
+
         int soLuongConLai = soLuongConLai(maTB, quanLyThietBiService.getAllQLTBs());
-        if(soLuongConLai == 0) {
+        if (soLuongConLai == 0) {
             JOptionPane.showMessageDialog(rootPane, "Thiết bị này đã hết trong kho! Không thể thêm vào phòng");
         } else {
             luuLaiButton.setVisible(true);
@@ -605,9 +637,9 @@ public class ThietBiPhongJframe extends javax.swing.JFrame {
     private void capNhapTBButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_capNhapTBButtonActionPerformed
         // TODO add your handling code here:
         int confirm = JOptionPane.showConfirmDialog(rootPane, "Bạn có chắc chắn muốn sửa không?");
-        if(confirm == JOptionPane.YES_OPTION) {
+        if (confirm == JOptionPane.YES_OPTION) {
             int row = thietBiTable.getSelectedRow();
-            if(row == -1) {
+            if (row == -1) {
                 JOptionPane.showMessageDialog(rootPane, "Vui lòng chọn trường cần sửa");
             } else {
                 int maPhong = Integer.parseInt(String.valueOf(thietBiTable.getValueAt(row, 0)));
@@ -620,13 +652,13 @@ public class ThietBiPhongJframe extends javax.swing.JFrame {
 //                Xét lại các thuộc tính của quản lý thiết bị và thiết bị
                 qLTB = quanLyThietBiService.getQLTBByMaTB(maTB, maPhong);
                 tB = thietBiService.getTBByMaTB(maTB);
-                
+
                 tB.setTinhTrang(tinhTrang);
-                
+
                 qLTB.setSoLuong(soLuong);
                 qLTB.setNgayKiemTra(ngayKiemTra);
                 qLTB.setGhiChu(ghiChu);
-                
+
 ////                Xét lại số lượng tổng
 //                int soLuongTong = 0;
 //                if(soLuong > qLTB.getSoLuong()) {
@@ -634,7 +666,6 @@ public class ThietBiPhongJframe extends javax.swing.JFrame {
 //                } else if(soLuong < qLTB.getSoLuong()){
 //                    soLuongTong = (tB.getSoLuong() - (qLTB.getSoLuong() - soLuong));
 //                }
-                
                 thietBiService.updateThietBi(tB);
                 quanLyThietBiService.updateQLTB(qLTB);
                 setTableTB();
@@ -667,17 +698,17 @@ public class ThietBiPhongJframe extends javax.swing.JFrame {
         int maPhong = Integer.parseInt(String.valueOf(maPhongCbb.getSelectedItem()));
         String maQL = maQLTBTF.getText();
         String loaiTb = String.valueOf(loaiTBCbb.getSelectedItem());
-        
+
         listQLTB = quanLyThietBiService.getAllQLTBs();
         boolean isContinue = true;
-        for(QuanLyThietBi qltb : listQLTB) {
-            if(qltb.getMaTB().equals(maTB) && qltb.getMaPhong() == maPhong) {
+        for (QuanLyThietBi qltb : listQLTB) {
+            if (qltb.getMaTB().equals(maTB) && qltb.getMaPhong() == maPhong) {
                 qltb.setSoLuong(qltb.getSoLuong() + soLuong);
                 quanLyThietBiService.updateQLTB(qltb);
                 isContinue = false;
             }
         }
-        if(isContinue) {
+        if (isContinue) {
             qLTB = new QuanLyThietBi(maPhong, soLuong, maTB, maQL, ghiChu, ngayBanGiao, ngayKiemTra);
             quanLyThietBiService.insertQLTB(qLTB);
         }
@@ -689,7 +720,7 @@ public class ThietBiPhongJframe extends javax.swing.JFrame {
     private void chuyenTBButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_chuyenTBButtonActionPerformed
         // TODO add your handling code here:
         int row = thietBiTable.getSelectedRow();
-        if(row == -1) {
+        if (row == -1) {
             JOptionPane.showMessageDialog(rootPane, "Vui lòng chọn thiết bị để chuyển");
         } else {
             String maTB = String.valueOf(thietBiTable.getValueAt(row, 1));
@@ -704,58 +735,34 @@ public class ThietBiPhongJframe extends javax.swing.JFrame {
         tB = thietBiService.getTBByMaTB(maTB);
         int sLCon = soLuongConLai(maTB, quanLyThietBiService.getAllQLTBs());
         sLConLaiTF.setText("" + sLCon);
-        
+        SpinnerModel spinner = new SpinnerNumberModel(1, 1, sLCon, 1);
+        soLuongTBSp.setModel(spinner);
+
         tenTBTF.setText(tB.getTenTB());
         tinhTrangTBCbb.setSelectedItem(tB.getTinhTrang());
         loaiTBCbb.setSelectedItem(tB.getLoaiTB());
     }//GEN-LAST:event_maTBCbbActionPerformed
 
-    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+    private void themTBTongButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_themTBTongButtonActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jButton2ActionPerformed
-    
+        new ThemThietBiJframe(maQL).setVisible(true);
+        this.dispose();
+    }//GEN-LAST:event_themTBTongButtonActionPerformed
+
+    private void quayLaiButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_quayLaiButtonActionPerformed
+        // TODO add your handling code here:
+        this.dispose();
+    }//GEN-LAST:event_quayLaiButtonActionPerformed
+
     /**
      * @param args the command line arguments
      */
-    public static void main(String args[]) {
-        /* Set the Nimbus look and feel */
-        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
-         */
-        try {
-            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
-                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-                    break;
-                }
-            }
-        } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(ThietBiPhongJframe.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(ThietBiPhongJframe.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(ThietBiPhongJframe.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(ThietBiPhongJframe.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        }
-        //</editor-fold>
-        //</editor-fold>
-
-        /* Create and display the form */
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                new ThietBiPhongJframe().setVisible(true);
-            }
-        });
-    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton capNhapTBButton;
     private javax.swing.JButton chuyenTBButton;
     private javax.swing.JTextArea ghiChuTBTA;
     private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
@@ -787,11 +794,13 @@ public class ThietBiPhongJframe extends javax.swing.JFrame {
     private javax.swing.JComboBox<String> maTBCbb;
     private com.toedter.calendar.JDateChooser ngayBanGiaoDC;
     private com.toedter.calendar.JDateChooser ngayKiemTraDC;
+    private javax.swing.JButton quayLaiButton;
     private javax.swing.JButton refreshButton;
     private javax.swing.JTextField sLConLaiTF;
     private javax.swing.JSpinner soLuongTBSp;
     private javax.swing.JTextField tenTBTF;
     private javax.swing.JButton themTBButton;
+    private javax.swing.JButton themTBTongButton;
     private javax.swing.JTable thietBiTable;
     private javax.swing.JComboBox<String> tinhTrangTBCbb;
     private javax.swing.JButton xoaTBButton;

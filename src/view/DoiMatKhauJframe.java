@@ -198,9 +198,11 @@ public class DoiMatKhauJframe extends javax.swing.JFrame {
     private void doiMatKhauButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_doiMatKhauButtonActionPerformed
         // TODO add your handling code here:
         String matKhauHT = String.valueOf(matKhauHTPF.getPassword());
-        if(qL.getMatKhau().equalsIgnoreCase(matKhauHT)) {
-            String matKhauMoi = String.valueOf(matKhauMoiPF.getPassword());
-            String nhapLai = String.valueOf(nhapLaiPF.getPassword());
+        String matKhauMoi = String.valueOf(matKhauMoiPF.getPassword());
+        String nhapLai = String.valueOf(nhapLaiPF.getPassword());
+        if(matKhauMoi.length() < 8) {
+            JOptionPane.showMessageDialog(rootPane, "Mật khẩu không được nhỏ hơn 8 kí tự");
+        }else if(qL.getMatKhau().equalsIgnoreCase(matKhauHT)) {
             if(matKhauMoi.equalsIgnoreCase(nhapLai)) {
                 qL.setMatKhau(matKhauMoi);
                 quanLyService.updateQuanLy(qL);

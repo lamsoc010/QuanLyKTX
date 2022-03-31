@@ -72,7 +72,7 @@ import javax.swing.table.TableColumnModel;
  * @author Admin
  */
 public class MainJframe extends javax.swing.JFrame {
-
+    
     SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd");
     JFileChooser fileChooser;
     String maQL;
@@ -126,18 +126,28 @@ public class MainJframe extends javax.swing.JFrame {
         setTableKL();
         setTableCP();
         setTableTraP();
-
+        
         chuyenThongKe();
-
+        
         maQL = userName;
         luuLaiCPButton.setVisible(false);
         luuLaiKLButton.setVisible(false);
         luuLaiPhongButton.setVisible(false);
         luuLaiTraPButton.setVisible(false);
         choThueLaiButton.setVisible(false);
-
+        
         setVisibleSearch(false);
         SoftByHeaderColumn();
+
+//        admin
+        thuTienMenu.setVisible(false);
+        qLThietBiButton.setVisible(false);
+        qLTaiKhoanMenu.setVisible(false);
+        if (userName.equals("admin")) {
+            thuTienMenu.setVisible(true);
+            qLThietBiButton.setVisible(true);
+            qLTaiKhoanMenu.setVisible(true);
+        }
     }
 
     /**
@@ -240,7 +250,7 @@ public class MainJframe extends javax.swing.JFrame {
         jSeparator3 = new javax.swing.JToolBar.Separator();
         jButton8 = new javax.swing.JButton();
         jSeparator4 = new javax.swing.JToolBar.Separator();
-        jButton9 = new javax.swing.JButton();
+        qLThietBiButton = new javax.swing.JButton();
         jPanel4 = new javax.swing.JPanel();
         jPanel5 = new javax.swing.JPanel();
         jLabel14 = new javax.swing.JLabel();
@@ -400,10 +410,13 @@ public class MainJframe extends javax.swing.JFrame {
         sinhVienMenu = new javax.swing.JMenu();
         phongMenu = new javax.swing.JMenu();
         kyLuatMenu = new javax.swing.JMenu();
-        thuePhongMenu = new javax.swing.JMenu();
-        chuyenPhongMenu = new javax.swing.JMenu();
-        traPhongMenu = new javax.swing.JMenu();
+        qLPhongMenu = new javax.swing.JMenu();
+        thuePhongMenu = new javax.swing.JMenuItem();
+        chuyenPhongMenu = new javax.swing.JMenuItem();
+        traPhongMenu = new javax.swing.JMenuItem();
+        thuTienMenu = new javax.swing.JMenu();
         taiKhoanMenu = new javax.swing.JMenu();
+        qLTaiKhoanMenu = new javax.swing.JMenu();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Kí túc xá Phú Xuân");
@@ -656,7 +669,7 @@ public class MainJframe extends javax.swing.JFrame {
                 .addComponent(jPanel32, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(jPanel33, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 61, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 77, Short.MAX_VALUE)
                 .addComponent(jButton1)
                 .addContainerGap())
         );
@@ -720,7 +733,7 @@ public class MainJframe extends javax.swing.JFrame {
             jPanel26Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel26Layout.createSequentialGroup()
                 .addComponent(TKPhongPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 26, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 46, Short.MAX_VALUE)
                 .addComponent(TKKyLuatPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
             .addGroup(jPanel26Layout.createSequentialGroup()
                 .addGroup(jPanel26Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -1002,16 +1015,16 @@ public class MainJframe extends javax.swing.JFrame {
                     .addComponent(jLabel4))
                 .addGap(18, 18, 18)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(searchSV1Button, javax.swing.GroupLayout.DEFAULT_SIZE, 130, Short.MAX_VALUE)
-                    .addGroup(jPanel3Layout.createSequentialGroup()
-                        .addComponent(hoTenSVTF)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
+                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(hoTenSVTF)
+                            .addComponent(maSVFT))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(hoTenRb))
-                    .addGroup(jPanel3Layout.createSequentialGroup()
-                        .addComponent(maSVFT)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(maSVRb))
-                    .addComponent(sdtSVTF, javax.swing.GroupLayout.DEFAULT_SIZE, 130, Short.MAX_VALUE))
+                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(maSVRb, javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(hoTenRb, javax.swing.GroupLayout.Alignment.TRAILING)))
+                    .addComponent(sdtSVTF, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(searchSV1Button, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(suaSVButton, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -1026,8 +1039,8 @@ public class MainJframe extends javax.swing.JFrame {
                                 .addComponent(namSVRB)
                                 .addGap(18, 18, 18)
                                 .addComponent(nuSVRB))
-                            .addComponent(diaChiSVTF, javax.swing.GroupLayout.DEFAULT_SIZE, 130, Short.MAX_VALUE)
-                            .addComponent(ngaySinhSVDV, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+                            .addComponent(diaChiSVTF)
+                            .addComponent(ngaySinhSVDV, javax.swing.GroupLayout.DEFAULT_SIZE, 130, Short.MAX_VALUE))))
                 .addGap(18, 18, 18)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel9)
@@ -1036,14 +1049,14 @@ public class MainJframe extends javax.swing.JFrame {
                 .addGap(18, 18, 18)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addGroup(jPanel3Layout.createSequentialGroup()
-                        .addComponent(nganhSVCbb, 0, 130, Short.MAX_VALUE)
+                        .addComponent(nganhSVCbb, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(nganhCb))
                     .addGroup(jPanel3Layout.createSequentialGroup()
                         .addComponent(khoaSVCbb, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(khoaCb))
-                    .addComponent(refreshSVButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(refreshSVButton, javax.swing.GroupLayout.DEFAULT_SIZE, 153, Short.MAX_VALUE)
                     .addComponent(ngayVaoSVDC, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addGap(18, 18, 18)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -1053,10 +1066,10 @@ public class MainJframe extends javax.swing.JFrame {
                 .addGap(18, 18, 18)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(xuatFileSVButton, javax.swing.GroupLayout.DEFAULT_SIZE, 145, Short.MAX_VALUE)
-                    .addComponent(soLanViPhamSVTF, javax.swing.GroupLayout.DEFAULT_SIZE, 145, Short.MAX_VALUE)
+                    .addComponent(soLanViPhamSVTF)
                     .addComponent(trangThaiSVTF)
                     .addComponent(maPhongSVTF))
-                .addContainerGap(87, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel3Layout.setVerticalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -1139,12 +1152,14 @@ public class MainJframe extends javax.swing.JFrame {
         jPanel2Layout.setHorizontalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(jSeparator7)
-            .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addComponent(jScrollPane1)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(danhSachSVLabel)
                 .addGap(453, 453, 453))
+            .addGroup(jPanel2Layout.createSequentialGroup()
+                .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, Short.MAX_VALUE))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -1208,14 +1223,19 @@ public class MainJframe extends javax.swing.JFrame {
         jToolBar2.add(jButton8);
         jToolBar2.add(jSeparator4);
 
-        jButton9.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
-        jButton9.setForeground(new java.awt.Color(0, 0, 102));
-        jButton9.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/Search.png"))); // NOI18N
-        jButton9.setText("Tìm Kiếm");
-        jButton9.setFocusable(false);
-        jButton9.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
-        jButton9.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
-        jToolBar2.add(jButton9);
+        qLThietBiButton.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
+        qLThietBiButton.setForeground(new java.awt.Color(0, 0, 102));
+        qLThietBiButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/Search.png"))); // NOI18N
+        qLThietBiButton.setText("Quản Lý Thiết Bị");
+        qLThietBiButton.setFocusable(false);
+        qLThietBiButton.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        qLThietBiButton.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        qLThietBiButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                qLThietBiButtonActionPerformed(evt);
+            }
+        });
+        jToolBar2.add(qLThietBiButton);
 
         jLabel14.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         jLabel14.setForeground(new java.awt.Color(0, 0, 102));
@@ -1301,6 +1321,7 @@ public class MainJframe extends javax.swing.JFrame {
             }
         });
 
+        maPhongFT.setEditable(false);
         try {
             maPhongFT.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("###")));
         } catch (java.text.ParseException ex) {
@@ -2631,8 +2652,14 @@ public class MainJframe extends javax.swing.JFrame {
         });
         jMenuBar1.add(kyLuatMenu);
 
-        thuePhongMenu.setBackground(new java.awt.Color(0, 0, 102));
-        thuePhongMenu.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        qLPhongMenu.setBackground(new java.awt.Color(0, 0, 102));
+        qLPhongMenu.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        qLPhongMenu.setForeground(new java.awt.Color(0, 0, 102));
+        qLPhongMenu.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/Open door.png"))); // NOI18N
+        qLPhongMenu.setText("Chức Năng Phòng");
+
+        thuePhongMenu.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_T, java.awt.event.InputEvent.CTRL_DOWN_MASK));
+        thuePhongMenu.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         thuePhongMenu.setForeground(new java.awt.Color(0, 0, 102));
         thuePhongMenu.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/Open door.png"))); // NOI18N
         thuePhongMenu.setText("QL Thuê Phòng");
@@ -2641,22 +2668,32 @@ public class MainJframe extends javax.swing.JFrame {
                 thuePhongMenuMouseClicked(evt);
             }
         });
-        jMenuBar1.add(thuePhongMenu);
+        thuePhongMenu.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                thuePhongMenuActionPerformed(evt);
+            }
+        });
+        qLPhongMenu.add(thuePhongMenu);
 
-        chuyenPhongMenu.setBackground(new java.awt.Color(0, 0, 102));
-        chuyenPhongMenu.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        chuyenPhongMenu.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_C, java.awt.event.InputEvent.CTRL_DOWN_MASK));
+        chuyenPhongMenu.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         chuyenPhongMenu.setForeground(new java.awt.Color(0, 0, 102));
         chuyenPhongMenu.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/Closed door.png"))); // NOI18N
-        chuyenPhongMenu.setText(" QL Chuyển Phòng");
+        chuyenPhongMenu.setText("QL Chuyển Phòng");
         chuyenPhongMenu.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 chuyenPhongMenuMouseClicked(evt);
             }
         });
-        jMenuBar1.add(chuyenPhongMenu);
+        chuyenPhongMenu.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                chuyenPhongMenuActionPerformed(evt);
+            }
+        });
+        qLPhongMenu.add(chuyenPhongMenu);
 
-        traPhongMenu.setBackground(new java.awt.Color(0, 0, 102));
-        traPhongMenu.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        traPhongMenu.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_X, java.awt.event.InputEvent.CTRL_DOWN_MASK));
+        traPhongMenu.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         traPhongMenu.setForeground(new java.awt.Color(0, 0, 102));
         traPhongMenu.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/Exit.png"))); // NOI18N
         traPhongMenu.setText("QL Trả Phòng");
@@ -2665,7 +2702,25 @@ public class MainJframe extends javax.swing.JFrame {
                 traPhongMenuMouseClicked(evt);
             }
         });
-        jMenuBar1.add(traPhongMenu);
+        traPhongMenu.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                traPhongMenuActionPerformed(evt);
+            }
+        });
+        qLPhongMenu.add(traPhongMenu);
+
+        jMenuBar1.add(qLPhongMenu);
+
+        thuTienMenu.setBackground(new java.awt.Color(0, 0, 102));
+        thuTienMenu.setForeground(new java.awt.Color(0, 0, 102));
+        thuTienMenu.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/dollar.png"))); // NOI18N
+        thuTienMenu.setText(" Thu Tiền");
+        thuTienMenu.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                thuTienMenuMouseClicked(evt);
+            }
+        });
+        jMenuBar1.add(thuTienMenu);
 
         taiKhoanMenu.setForeground(new java.awt.Color(0, 0, 102));
         taiKhoanMenu.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/User.png"))); // NOI18N
@@ -2676,6 +2731,16 @@ public class MainJframe extends javax.swing.JFrame {
             }
         });
         jMenuBar1.add(taiKhoanMenu);
+
+        qLTaiKhoanMenu.setForeground(new java.awt.Color(0, 0, 102));
+        qLTaiKhoanMenu.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/Users.png"))); // NOI18N
+        qLTaiKhoanMenu.setText("Quản Lý Tài Khoản");
+        qLTaiKhoanMenu.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                qLTaiKhoanMenuMouseClicked(evt);
+            }
+        });
+        jMenuBar1.add(qLTaiKhoanMenu);
 
         setJMenuBar(jMenuBar1);
 
@@ -2712,19 +2777,19 @@ public class MainJframe extends javax.swing.JFrame {
         phongService = new PhongService();
         p = new Phong();
         listPhong = phongService.getAllPhongs();
-
+        
         sinhVienService = new SinhVienService();
         sV = new SinhVien();
         listSV = sinhVienService.getAllSinhViens();
-
+        
         thuePhongService = new ThuePhongService();
-
+        
         kyLuatService = new KyLuatService();
-
+        
         quanLyService = new QuanLyService();
-
+        
         chuyenPhongService = new ChuyenPhongService();
-
+        
         traPhongService = new TraPhongService();
     }
 //    Sinh Viên
@@ -2737,7 +2802,6 @@ public class MainJframe extends javax.swing.JFrame {
             }
         };
         
-
         sinhVienTable.setModel(defaultSVModel);
         defaultSVModel.addColumn("Mã SV");
         defaultSVModel.addColumn("Họ Tên");
@@ -2752,14 +2816,14 @@ public class MainJframe extends javax.swing.JFrame {
         defaultSVModel.addColumn("Vi Phạm");
         
         TableColumnModel colModel = sinhVienTable.getColumnModel();
-
+        
         colModel.getColumn(0).setPreferredWidth(50);
         colModel.getColumn(1).setPreferredWidth(120);
         colModel.getColumn(4).setPreferredWidth(120);
-
+        
         setDataSV(sinhVienService.getAllSinhViens());
     }
-
+    
     public void setDataSV(List<SinhVien> listSV) {
         defaultSVModel.setRowCount(0);
         listSV.forEach(sv -> {
@@ -2771,7 +2835,7 @@ public class MainJframe extends javax.swing.JFrame {
             }
         });
     }
-
+    
     private void setVisibleSearch(boolean result) {
         maSVRb.setVisible(result);
         hoTenRb.setVisible(result);
@@ -2787,7 +2851,7 @@ public class MainJframe extends javax.swing.JFrame {
             public boolean isCellEditable(int row, int column) {
                 return false;
             }
-
+            
         };
         phongTable.setModel(defaultPModel);
         defaultPModel.addColumn("Mã Phòng");
@@ -2796,10 +2860,10 @@ public class MainJframe extends javax.swing.JFrame {
         defaultPModel.addColumn("Số Người");
         defaultPModel.addColumn("Giá Tiền");
         defaultPModel.addColumn("Trạng Thái");
-
+        
         setDataPhong(listPhong);
     }
-
+    
     private void setDataPhong(List<Phong> listPhong) {
         defaultPModel.setRowCount(0);
         listPhong.forEach(p -> {
@@ -2807,7 +2871,7 @@ public class MainJframe extends javax.swing.JFrame {
                 p.getMaPhong(), p.getLoaiPhong(), p.getSoGiuong(), p.getSoNguoi(), p.getGiaTien(), p.getTrangThai()
             });
         });
-
+        
     }
 
 //    Thuê Phòng:
@@ -2817,7 +2881,7 @@ public class MainJframe extends javax.swing.JFrame {
             public boolean isCellEditable(int row, int column) {
                 return false;
             }
-
+            
         };
         thuePhongTable.setModel(defaultTPModel);
         defaultTPModel.addColumn("Mã Phiếu");
@@ -2826,9 +2890,9 @@ public class MainJframe extends javax.swing.JFrame {
         defaultTPModel.addColumn("Mã Phòng");
         defaultTPModel.addColumn("Ngày Vào");
         setDataTP(thuePhongService.getAllThuePhongs());
-
+        
     }
-
+    
     private void setDataTP(List<ThuePhong> listTP) {
         defaultTPModel.setRowCount(0);
         listTP.forEach(tP -> {
@@ -2845,7 +2909,7 @@ public class MainJframe extends javax.swing.JFrame {
             public boolean isCellEditable(int row, int column) {
                 return false;
             }
-
+            
         };
         kyLuatTable.setModel(defaultKLModel);
         defaultKLModel.addColumn("Mã Phiếu");
@@ -2856,13 +2920,13 @@ public class MainJframe extends javax.swing.JFrame {
         defaultKLModel.addColumn("Mã QL");
         defaultKLModel.addColumn("Ngày Vi Phạm");
         TableColumnModel colModel = kyLuatTable.getColumnModel();
-
+        
         colModel.getColumn(0).setPreferredWidth(40);
         colModel.getColumn(1).setPreferredWidth(40);
         colModel.getColumn(2).setPreferredWidth(150);
         setDataKL(kyLuatService.getAllKyLuats());
     }
-
+    
     private void setDataKL(List<KyLuat> listKL) {
         defaultKLModel.setRowCount(0);
         listKL.forEach(kL -> {
@@ -2879,7 +2943,7 @@ public class MainJframe extends javax.swing.JFrame {
             public boolean isCellEditable(int row, int column) {
                 return false;
             }
-
+            
         };
         chuyenPhongTable.setModel(defaultCPModel);
         defaultCPModel.addColumn("Mã Phiếu");
@@ -2889,10 +2953,10 @@ public class MainJframe extends javax.swing.JFrame {
         defaultCPModel.addColumn("Mã QL");
         defaultCPModel.addColumn("Ngày Chuyển");
         defaultCPModel.addColumn("Lí Do");
-
+        
         setDataCP(chuyenPhongService.getAllChuyenPhongs());
     }
-
+    
     private void setDataCP(List<ChuyenPhong> listCP) {
         defaultCPModel.setRowCount(0);
         listCP.forEach(cP -> {
@@ -2909,7 +2973,7 @@ public class MainJframe extends javax.swing.JFrame {
             public boolean isCellEditable(int row, int column) {
                 return false;
             }
-
+            
         };
         traPhongTable.setModel(defaultTraPModel);
         defaultTraPModel.addColumn("Mã Phiếu");
@@ -2918,10 +2982,10 @@ public class MainJframe extends javax.swing.JFrame {
         defaultTraPModel.addColumn("Mã QL");
         defaultTraPModel.addColumn("Ngày Trả");
         defaultTraPModel.addColumn("Lí Do");
-
+        
         setDataTraP(traPhongService.getAlLTraPhongs());
     }
-
+    
     private void setDataTraP(List<TraPhong> listTraP) {
         defaultTraPModel.setRowCount(0);
         listTraP.forEach(traP -> {
@@ -2949,12 +3013,12 @@ public class MainJframe extends javax.swing.JFrame {
         String sql = "SELECT COUNT(MASV) AS SOSV, NGAYVAO FROM dbo.THUEPHONG WHERE YEAR(NGAYVAO) = YEAR(GETDATE())\n"
                 + "	GROUP BY NGAYVAO";
         thongKeThuePhong(sql);
-
-        String sqlKL = "SELECT COUNT(MASV) AS SOSV, NGAYVIPHAM FROM dbo.KYLUAT \n"
+        
+        String sqlKL = "SELECT COUNT(MASV) AS SOSV, NGAYVIPHAM FROM dbo.KYLUAT \n WHERE MONTH(NGAYVIPHAM) = 1"
                 + "	GROUP BY NGAYVIPHAM";
         thongKeKyLuat(sqlKL);
     }
-
+    
     private void thongKePhong() {
         DefaultCategoryDataset dataSet = new DefaultCategoryDataset();
         listPhong = phongService.getAllPhongs();
@@ -2972,10 +3036,10 @@ public class MainJframe extends javax.swing.JFrame {
         TKPhongPanel.validate();
         TKPhongPanel.repaint();
     }
-
+    
     private void thongKeThuePhong(String sql) {
         DefaultCategoryDataset dataSet = new DefaultCategoryDataset();
-
+        
         listTK = thuePhongService.thongKeSVTP(sql);
         for (ThongKeSV tK : listTK) {
 //            if(tP.)
@@ -2992,14 +3056,14 @@ public class MainJframe extends javax.swing.JFrame {
         TKThuePhongPanel.validate();
         TKThuePhongPanel.repaint();
     }
-
+    
     private void thongKeKyLuat(String sql) {
         DefaultCategoryDataset dataSet = new DefaultCategoryDataset();
-        
+
 //        Đổ dữ liệu vào dataset thông qua list 
         listTKKL = kyLuatService.thongKeKLSV(sql);
         for (ThongKeKL kL : listTKKL) {
-            dataSet.setValue(kL.getSoSV(), "Số Sinh Viên", kL.getNgayViPham());
+            dataSet.setValue(kL.getSoSV(), "Số Sinh Viên", kL.getNgayViPham().toString().substring(kL.getNgayViPham().toString().length() - 2));
         }
         
         JFreeChart chart = ChartFactory.createBarChart("Số SV bị kỉ luật", "Ngày", "Số SV", dataSet, PlotOrientation.VERTICAL, true, true, true);
@@ -3023,7 +3087,7 @@ public class MainJframe extends javax.swing.JFrame {
     private void sinhVienMenuMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_sinhVienMenuMouseClicked
         // TODO add your handling code here:
         changeTabMenu(sinhVienPanel);
-
+        
         listSV = sinhVienService.getAllSinhViens();
         int dem = 0;
         for (SinhVien sV : listSV) {
@@ -3038,7 +3102,7 @@ public class MainJframe extends javax.swing.JFrame {
     private void phongMenuMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_phongMenuMouseClicked
         // TODO add your handling code here:
         changeTabMenu(phongPanel);
-
+        
         setDataPhong(phongService.getAllPhongs());
 
     }//GEN-LAST:event_phongMenuMouseClicked
@@ -3046,54 +3110,13 @@ public class MainJframe extends javax.swing.JFrame {
     private void kyLuatMenuMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_kyLuatMenuMouseClicked
         // TODO add your handling code here:
         changeTabMenu(kyLuatPanel);
-
+        maQLKLTF.setText(maQL);
         loaiKLCbb.removeAllItems();
         listQL = quanLyService.getAllQuanLys();
         listQL.forEach(qL -> {
             loaiKLCbb.addItem(qL.getPhuTrach());
         });
     }//GEN-LAST:event_kyLuatMenuMouseClicked
-
-    private void thuePhongMenuMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_thuePhongMenuMouseClicked
-        // TODO add your handling code here:
-        changeTabMenu(thuePhongPanel);
-
-        maPhongTPCbb.removeAllItems();
-        phongService.getAllPhongs().forEach(p -> {
-            if (p.getTrangThai().equalsIgnoreCase("Còn trống")) {
-                maPhongTPCbb.addItem(p.getMaPhong());
-            }
-        });
-
-        listTP = thuePhongService.getAllThuePhongs();
-        if (listTP.size() == 0) {
-            maPhieuTPTF.setText("" + 1);
-        } else {
-            maPhieuTPTF.setText("" + (listTP.get(listTP.size() - 1).getMaPhieu() + 1));
-        }
-
-        maQLTPTF.setText(maQL);
-
-        setDataTP(thuePhongService.getAllThuePhongs());
-    }//GEN-LAST:event_thuePhongMenuMouseClicked
-
-    private void chuyenPhongMenuMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_chuyenPhongMenuMouseClicked
-        // TODO add your handling code here:
-        changeTabMenu(chuyenPhongPanel);
-
-        maPhongMoiCbb.removeAllItems();
-        phongService.getAllPhongs().forEach(p -> {
-            if (p.getTrangThai().equalsIgnoreCase("Còn trống")) {
-                maPhongMoiCbb.addItem(p.getMaPhong());
-            }
-        });
-
-    }//GEN-LAST:event_chuyenPhongMenuMouseClicked
-
-    private void traPhongMenuMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_traPhongMenuMouseClicked
-        // TODO add your handling code here:
-        changeTabMenu(traPhongPanel);
-    }//GEN-LAST:event_traPhongMenuMouseClicked
 
     private void soGiuongSpStateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_soGiuongSpStateChanged
         // TODO add your handling code here:
@@ -3140,7 +3163,7 @@ public class MainJframe extends javax.swing.JFrame {
 
     private void themPhongButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_themPhongButtonActionPerformed
         // TODO add your handling code here:
-        maPhongFT.setEditable(true);
+        maPhongFT.setEditable(false);
         listPhong = phongService.getAllPhongs();
         if (listPhong.size() == 0) {
             maPhongFT.setText("" + 100);
@@ -3165,13 +3188,13 @@ public class MainJframe extends javax.swing.JFrame {
             int check = JOptionPane.showConfirmDialog(rootPane, "Bạn có chắc chắn muốn xoá không?");
             if (check == JOptionPane.YES_OPTION) {
                 int maPhong = Integer.parseInt(String.valueOf(phongTable.getValueAt(row, 0)));
-
+                
                 int soNguoi = Integer.parseInt(String.valueOf(phongTable.getValueAt(row, 3)));
                 if (soNguoi != 0) {
                     JOptionPane.showMessageDialog(rootPane, "Phòng này đang có người thuê không thể xoá!", "Thông báo lỗi", JOptionPane.ERROR_MESSAGE);
                 } else {
                     phongService.deletePhong(maPhong);
-
+                    
                     setDataPhong(phongService.getAllPhongs());
                 }
             }
@@ -3189,9 +3212,9 @@ public class MainJframe extends javax.swing.JFrame {
             p.setSoGiuong(Integer.parseInt(String.valueOf(soGiuongSp.getValue())));
             p.setGiaTien(Double.parseDouble(giaTienFT.getText().replace(",", "")));
             phongService.updatePhong(p);
-
+            
             setDataPhong(phongService.getAllPhongs());
-
+            
         }
     }//GEN-LAST:event_suaPhongButtonActionPerformed
 
@@ -3203,11 +3226,11 @@ public class MainJframe extends javax.swing.JFrame {
         p.setSoNguoi(Integer.parseInt(String.valueOf(soNguoiSp.getValue())));
         p.setGiaTien(Double.parseDouble(giaTienFT.getText().replace(",", "")));
         p.setTrangThai("Còn Trống");
-
+        
         phongService.insertPhong(p);
-
+        
         luuLaiPhongButton.setVisible(false);
-
+        
         setDataPhong(phongService.getAllPhongs());
         refreshButtonActionPerformed(evt);
     }//GEN-LAST:event_luuLaiPhongButtonActionPerformed
@@ -3242,15 +3265,15 @@ public class MainJframe extends javax.swing.JFrame {
             double soNguoi = p.getSoNguoi();
             SpinnerModel soGiuongSpinner;
             int min = (int) Math.ceil(soNguoi / 2);
-            if(min == 0) {
+            if (min == 0) {
                 soGiuongSpinner = new SpinnerNumberModel(p.getSoGiuong(), 1, 6, 1);
             } else {
-                soGiuongSpinner = new SpinnerNumberModel(p.getSoGiuong(), min, 6, 1); 
+                soGiuongSpinner = new SpinnerNumberModel(p.getSoGiuong(), min, 6, 1);                
             }
             soGiuongSp.setModel(soGiuongSpinner);
             soNguoiSp.setValue(p.getSoNguoi());
             giaTienFT.setValue(p.getGiaTien());
-
+            
             luuLaiPhongButton.setVisible(false);
             
         }
@@ -3280,7 +3303,7 @@ public class MainJframe extends javax.swing.JFrame {
 //        Check dữ liệu
         boolean isTrue = true;
         listSV = sinhVienService.getAllSinhViens();
-
+        
         for (SinhVien sv : listSV) {
             if (sv.getMaSV().equalsIgnoreCase(maSV)) {
                 maSVTPFT.setText("");
@@ -3288,7 +3311,7 @@ public class MainJframe extends javax.swing.JFrame {
                 JOptionPane.showMessageDialog(rootPane, "Sinh viên này đã tồn tại trong Kí Túc Xá", "Thông báo lỗi", JOptionPane.ERROR_MESSAGE);
             }
         }
-
+        
         if (maSV.length() != 8 || anh == "" || hoTen == "" || sdt.length() != 10 || gioiTinh == "" || diaChi == "" || ngaySinh == null || nganh == "" || khoa == "" || ngayVao == null) {
             isTrue = false;
         }
@@ -3319,7 +3342,7 @@ public class MainJframe extends javax.swing.JFrame {
             tP.setNgayVao(ngayVao);
             tP.setTrangThai("BT");
             thuePhongService.insertThuePhong(tP);
-
+            
             setDataTP(thuePhongService.getAllThuePhongs());
 
             //        Phòng:
@@ -3341,14 +3364,14 @@ public class MainJframe extends javax.swing.JFrame {
                     maPhongTPCbb.addItem(p.getMaPhong());
                 }
             });
-
+            
             listTP = thuePhongService.getAllThuePhongs();
             maPhieuTPTF.setText("" + (listTP.get(listTP.size() - 1).getMaPhieu() + 1));
             refreshSVTPButtonActionPerformed(evt);
         } else {
             JOptionPane.showMessageDialog(rootPane, "Vui lòng điền đầy đủ thông tin", "Thông báo lỗi", JOptionPane.ERROR_MESSAGE);
         }
-
+        
 
     }//GEN-LAST:event_themSVTPButtonActionPerformed
 
@@ -3423,7 +3446,7 @@ public class MainJframe extends javax.swing.JFrame {
             int maPhong = Integer.parseInt(maPhongSVTF.getText());
             int soLanViPham = Integer.parseInt(soLanViPhamSVTF.getText());
             String trangThai = trangThaiSVTF.getText();
-
+            
             sV.setMaSV(maSV);
             sV.setAnh(anh);
             sV.setHoTen(hoTen);
@@ -3437,9 +3460,9 @@ public class MainJframe extends javax.swing.JFrame {
             sV.setMaPhong(maPhong);
             sV.setSoLanViPham(soLanViPham);
             sV.setTrangThai(trangThai);
-
+            
             sinhVienService.updateSinhVien(sV);
-
+            
             setDataSV(sinhVienService.getAllSinhViens());
         }
     }//GEN-LAST:event_suaSVButtonActionPerformed
@@ -3504,9 +3527,9 @@ public class MainJframe extends javax.swing.JFrame {
                 int maPhieu = Integer.parseInt(String.valueOf(thuePhongTable.getValueAt(row, 0)));
                 String maSV = String.valueOf(thuePhongTable.getValueAt(row, 1));
                 Date ngayVao = ngayVaoSVTPDC.getDate();
-
+                
                 thuePhongService.updateNgayVaoThuePhong(ngayVao, maPhieu);
-
+                
                 listSV = sinhVienService.getAllSinhViens();
                 for (SinhVien sv : listSV) {
                     if (sv.getMaSV().equals(maSV)) {
@@ -3514,10 +3537,10 @@ public class MainJframe extends javax.swing.JFrame {
                         sinhVienService.updateSinhVien(sv);
                     }
                 }
-
+                
                 setDataTP(thuePhongService.getAllThuePhongs());
             }
-
+            
         }
 
     }//GEN-LAST:event_suaSVTPButtonActionPerformed
@@ -3567,7 +3590,7 @@ public class MainJframe extends javax.swing.JFrame {
         if (row == -1) {
             JOptionPane.showMessageDialog(rootPane, "Vui lòng chọn phiếu kỷ luật");
         } else {
-
+            
             int maPhieu = Integer.parseInt(String.valueOf(kyLuatTable.getValueAt(row, 0)));
             kL = kyLuatService.getKyLuatByMaPhieu(maPhieu);
             maPhieuKLTF.setText("" + kL.getMaPhieu());
@@ -3594,16 +3617,16 @@ public class MainJframe extends javax.swing.JFrame {
             Date ngayViPham = ngayViPhamDC.getDate();
             boolean isTrue = false;
             listSV = sinhVienService.getAllSinhViens();
-            for(SinhVien sV : listSV) {
+            for (SinhVien sV : listSV) {
                 if (sV.getMaSV().equalsIgnoreCase(maSV)) {
-                    if(sV.getNgayVao().before(ngayViPham)) {
+                    if (sV.getNgayVao().before(ngayViPham)) {
                         isTrue = true;
                         sV.setSoLanViPham(sV.getSoLanViPham() + 1);
                         sinhVienService.updateSinhVien(sV);
                     }
                 }
             };
-            if(isTrue) {
+            if (isTrue) {
                 kL = new KyLuat();
                 kL.setMaPhieu(maPhieu);
                 kL.setLoaiKL(loaiKL);
@@ -3612,14 +3635,13 @@ public class MainJframe extends javax.swing.JFrame {
                 kL.setMaSV(maSV);
                 kL.setMaQL(maQL);
                 kL.setNgayViPham(ngayViPham);
-
+                
                 kyLuatService.insertKyLuat(kL);
                 refreshKLButtonActionPerformed(evt);
             } else {
                 JOptionPane.showMessageDialog(rootPane, "Ngày vi phạm không được trước ngày vào của sinh viên");
             }
-
-
+            
         }
     }//GEN-LAST:event_luuLaiKLButtonActionPerformed
 
@@ -3629,7 +3651,7 @@ public class MainJframe extends javax.swing.JFrame {
         noiDungKLTA.setText("");
         hinhThucPhatKLTA.setText("");
         luuLaiKLButton.setVisible(false);
-
+        
         setDataKL(kyLuatService.getAllKyLuats());
     }//GEN-LAST:event_refreshKLButtonActionPerformed
 
@@ -3670,7 +3692,7 @@ public class MainJframe extends javax.swing.JFrame {
             String maSV = maSVCPFT.getText();
             listSV = sinhVienService.getAllSinhViens();
             listPhong = phongService.getAllPhongs();
-
+            
             boolean isTrue = false;
             for (SinhVien sv : listSV) {
                 if (sv.getMaSV().equalsIgnoreCase(maSV)) {
@@ -3690,7 +3712,7 @@ public class MainJframe extends javax.swing.JFrame {
                 int maPhongMoi = Integer.parseInt(String.valueOf(maPhongMoiCbb.getSelectedItem()));
                 cP.setMaPhongMoi(maPhongMoi);
                 cP.setLiDo(liDoCPTA.getText());
-
+                
                 chuyenPhongService.insertChuyenPhong(cP);
 
 //                Đổi mã phòng trong sinh viên:
@@ -3712,9 +3734,9 @@ public class MainJframe extends javax.swing.JFrame {
                     }
                 }
                 refreshCPButtonActionPerformed(evt);
-
+                
             }
-
+            
         }
     }//GEN-LAST:event_luuLaiCPButtonActionPerformed
 
@@ -3725,10 +3747,10 @@ public class MainJframe extends javax.swing.JFrame {
         maPhongCuTF.setText("");
         maPhongMoiCbb.setSelectedIndex(0);
         liDoCPTA.setText("");
-
+        
         luuLaiCPButton.setVisible(false);
         setDataCP(chuyenPhongService.getAllChuyenPhongs());
-
+        
         maPhongMoiCbb.removeAllItems();
         phongService.getAllPhongs().forEach(p -> {
             if (p.getTrangThai().equalsIgnoreCase("Còn trống")) {
@@ -3744,7 +3766,7 @@ public class MainJframe extends javax.swing.JFrame {
             int maPhieu = Integer.parseInt(maPhieuCPTF.getText());
             Date ngayChuyen = ngayChuyenDC.getDate();
             String liDo = liDoCPTA.getText();
-
+            
             listCP = chuyenPhongService.getAllChuyenPhongs();
             for (ChuyenPhong cP : listCP) {
                 if (cP.getMaPhieu() == maPhieu) {
@@ -3765,7 +3787,7 @@ public class MainJframe extends javax.swing.JFrame {
         } else {
             int maPhieu = Integer.parseInt(String.valueOf(chuyenPhongTable.getValueAt(row, 0)));
             cP = chuyenPhongService.getChuyenPhongByMaPhieu(maPhieu);
-
+            
             maPhieuCPTF.setText("" + cP.getMaPhieu());
             ngayChuyenDC.setDate(cP.getNgayChuyen());
             maQLCPTF.setText(cP.getMaQL());
@@ -3783,7 +3805,7 @@ public class MainJframe extends javax.swing.JFrame {
         String maSV = maSVCPFT.getText();
         int maPhongCu = 0;
         listSV = sinhVienService.getAllSinhViens();
-
+        
         boolean isTrue = false;
         for (SinhVien sv : listSV) {
             if (sv.getMaSV().equalsIgnoreCase(maSV)) {
@@ -3840,7 +3862,7 @@ public class MainJframe extends javax.swing.JFrame {
         maSVTraPFT.setText("");
         maPhongTraPTF.setText("");
         liDoTraPTA.setText("");
-
+        
         luuLaiTraPButton.setVisible(false);
         setDataTraP(traPhongService.getAlLTraPhongs());
         maSVTraPFT.setEditable(true);
@@ -3853,14 +3875,14 @@ public class MainJframe extends javax.swing.JFrame {
             String maSV = maSVTraPFT.getText();
             listSV = sinhVienService.getAllSinhViens();
             listPhong = phongService.getAllPhongs();
-
+            
             boolean isTrue = false;
             for (SinhVien sv : listSV) {
                 if (sv.getMaSV().equalsIgnoreCase(maSV)) {
                     isTrue = true;
                 }
             }
-
+            
             if (!isTrue) {
                 JOptionPane.showMessageDialog(rootPane, "Sinh viên này không tồn tại trong KTX!");
             } else {
@@ -3868,16 +3890,16 @@ public class MainJframe extends javax.swing.JFrame {
                 Date ngayTra = ngayTraDC.getDate();
                 int maPhongTra = Integer.parseInt(maPhongTraPTF.getText());
                 String liDo = liDoTraPTA.getText();
-
+                
                 traP = new TraPhong();
-
+                
                 traP.setMaPhieu(maPhieu);
                 traP.setMaSV(maSV);
                 traP.setMaPhong(maPhongTra);
                 traP.setMaQL(maQL);
                 traP.setNgayTra(ngayTra);
                 traP.setLiDo(liDo);
-
+                
                 traPhongService.insertTraPhong(traP);
                 refreshTraPButtonActionPerformed(evt);
 
@@ -3897,7 +3919,7 @@ public class MainJframe extends javax.swing.JFrame {
                     }
                 }
             }
-
+            
         }
     }//GEN-LAST:event_luuLaiTraPButtonActionPerformed
 
@@ -3906,7 +3928,7 @@ public class MainJframe extends javax.swing.JFrame {
         String maSV = maSVTraPFT.getText();
         int maPhongTra = 0;
         listSV = sinhVienService.getAllSinhViens();
-
+        
         boolean isTrue = false;
         for (SinhVien sv : listSV) {
             if (sv.getMaSV().equalsIgnoreCase(maSV)) {
@@ -3948,7 +3970,7 @@ public class MainJframe extends javax.swing.JFrame {
             sql += " AND KHOA = N'" + khoa + "'";
         }
         listSV = sinhVienService.searchSinhVien(sql);
-
+        
         int dem = 0;
         for (SinhVien sV : listSV) {
             if (sV.getTrangThai().equalsIgnoreCase("đang thuê")) {
@@ -3956,10 +3978,10 @@ public class MainJframe extends javax.swing.JFrame {
             }
         }
         danhSachSVLabel.setText("Danh sách gồm " + dem + " sinh viên");
-
+        
         setDataSV(listSV);
     }//GEN-LAST:event_searchSV1ButtonActionPerformed
-
+    
 
     private void refreshSVButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_refreshSVButtonActionPerformed
         // TODO add your handling code here:
@@ -3973,7 +3995,7 @@ public class MainJframe extends javax.swing.JFrame {
         trangThaiSVTF.setText("");
         searchSV1Button.setVisible(false);
         setVisibleSearch(false);
-
+        
         setDataSV(sinhVienService.getAllSinhViens());
     }//GEN-LAST:event_refreshSVButtonActionPerformed
 
@@ -4008,7 +4030,7 @@ public class MainJframe extends javax.swing.JFrame {
             String maSV = String.valueOf(sinhVienTable.getValueAt(row, 0));
             int maPhong = Integer.parseInt(String.valueOf(sinhVienTable.getValueAt(row, 10)));
             changeTabMenu(traPhongPanel);
-
+            
             traPhongButtonActionPerformed(evt);
             maSVTraPFT.setText(maSV);
             maPhongTraPTF.setText("" + maPhong);
@@ -4023,13 +4045,13 @@ public class MainJframe extends javax.swing.JFrame {
         } else {
             String maSV = String.valueOf(sinhVienTable.getValueAt(row, 0));
             changeTabMenu(kyLuatPanel);
-
+            
             loaiKLCbb.removeAllItems();
             listQL = quanLyService.getAllQuanLys();
             listQL.forEach(qL -> {
                 loaiKLCbb.addItem(qL.getPhuTrach());
             });
-
+            
             themKyLuatButtonActionPerformed(evt);
             maSVKLTF.setText(maSV);
         }
@@ -4083,7 +4105,7 @@ public class MainJframe extends javax.swing.JFrame {
                 listSV = sinhVienService.getAllSinhViens();
                 for (int i = 1; i < listSV.size(); i++) {
                     row = sheet.createRow(i + 1);
-                    row.createCell(0).setCellValue(i+1);
+                    row.createCell(0).setCellValue(i + 1);
                     row.createCell(1).setCellValue(listSV.get(i).getMaSV());
                     row.createCell(2).setCellValue(listSV.get(i).getAnh());
                     row.createCell(3).setCellValue(listSV.get(i).getHoTen());
@@ -4098,7 +4120,7 @@ public class MainJframe extends javax.swing.JFrame {
                     row.createCell(12).setCellValue(listSV.get(i).getSoLanViPham());
                     row.createCell(13).setCellValue(listSV.get(i).getTrangThai());
                 }
-
+                
                 FileOutputStream file = new FileOutputStream("DanhSachSinhVien.xlsx");
                 wb.write(file);
                 JOptionPane.showMessageDialog(rootPane, "Xuất file thành công!");
@@ -4184,7 +4206,7 @@ public class MainJframe extends javax.swing.JFrame {
             int maPhieu = Integer.parseInt(maPhieuTraPTF.getText());
             Date ngayTra = ngayTraDC.getDate();
             String liDoTra = liDoTraPTA.getText();
-
+            
             listTraP = traPhongService.getAlLTraPhongs();
             for (TraPhong traP : listTraP) {
                 if (traP.getMaPhieu() == maPhieu) {
@@ -4197,15 +4219,93 @@ public class MainJframe extends javax.swing.JFrame {
         setDataTraP(traPhongService.getAlLTraPhongs());
     }//GEN-LAST:event_suaTraPButtonActionPerformed
 
-    private void quanLySVLabelMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_quanLySVLabelMouseClicked
+    private void thuePhongMenuMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_thuePhongMenuMouseClicked
         // TODO add your handling code here:
-        sinhVienMenuMouseClicked(evt);
-    }//GEN-LAST:event_quanLySVLabelMouseClicked
+        
+    }//GEN-LAST:event_thuePhongMenuMouseClicked
 
-    private void quanLyTPLabelMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_quanLyTPLabelMouseClicked
+    private void chuyenPhongMenuMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_chuyenPhongMenuMouseClicked
         // TODO add your handling code here:
-        thuePhongMenuMouseClicked(evt);
-    }//GEN-LAST:event_quanLyTPLabelMouseClicked
+        
+    }//GEN-LAST:event_chuyenPhongMenuMouseClicked
+
+    private void traPhongMenuMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_traPhongMenuMouseClicked
+        // TODO add your handling code here:
+        
+    }//GEN-LAST:event_traPhongMenuMouseClicked
+
+    private void traPhongMenuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_traPhongMenuActionPerformed
+        // TODO add your handling code here:
+        changeTabMenu(traPhongPanel);
+        maQLTraPTF.setText(maQL);
+    }//GEN-LAST:event_traPhongMenuActionPerformed
+
+    private void thuePhongMenuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_thuePhongMenuActionPerformed
+        // TODO add your handling code here:
+        changeTabMenu(thuePhongPanel);
+        
+        maPhongTPCbb.removeAllItems();
+        phongService.getAllPhongs().forEach(p -> {
+            if (p.getTrangThai().equalsIgnoreCase("Còn trống")) {
+                maPhongTPCbb.addItem(p.getMaPhong());
+            }
+        });
+        
+        listTP = thuePhongService.getAllThuePhongs();
+        if (listTP.size() == 0) {
+            maPhieuTPTF.setText("" + 1);
+        } else {
+            maPhieuTPTF.setText("" + (listTP.get(listTP.size() - 1).getMaPhieu() + 1));
+        }
+        
+        maQLTPTF.setText(maQL);
+        
+        setDataTP(thuePhongService.getAllThuePhongs());
+    }//GEN-LAST:event_thuePhongMenuActionPerformed
+
+    private void chuyenPhongMenuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_chuyenPhongMenuActionPerformed
+        // TODO add your handling code here:
+        changeTabMenu(chuyenPhongPanel);
+        maQLCPTF.setText(maQL);
+        maPhongMoiCbb.removeAllItems();
+        phongService.getAllPhongs().forEach(p -> {
+            if (p.getTrangThai().equalsIgnoreCase("Còn trống")) {
+                maPhongMoiCbb.addItem(p.getMaPhong());
+            }
+        });
+        
+    }//GEN-LAST:event_chuyenPhongMenuActionPerformed
+
+    private void thuTienMenuMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_thuTienMenuMouseClicked
+        // TODO add your handling code here:
+        new TinhTienJframe().setVisible(true);
+    }//GEN-LAST:event_thuTienMenuMouseClicked
+
+    private void qLThietBiButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_qLThietBiButtonActionPerformed
+        // TODO add your handling code here:
+        new ThietBiPhongJframe(maQL).setVisible(true);
+    }//GEN-LAST:event_qLThietBiButtonActionPerformed
+
+    private void qLTaiKhoanMenuMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_qLTaiKhoanMenuMouseClicked
+        // TODO add your handling code here:
+        new QuanLyTaiKhoanJframe().setVisible(true);
+    }//GEN-LAST:event_qLTaiKhoanMenuMouseClicked
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        // TODO add your handling code here:
+        new FormLoginJframe().setVisible(true);
+        this.dispose();
+    }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void quanLyKyLuatLabelMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_quanLyKyLuatLabelMouseClicked
+        // TODO add your handling code here:
+        kyLuatMenuMouseClicked(evt);
+    }//GEN-LAST:event_quanLyKyLuatLabelMouseClicked
+
+    private void quanLyPhongLabelMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_quanLyPhongLabelMouseClicked
+        // TODO add your handling code here:
+        phongMenuMouseClicked(evt);
+    }//GEN-LAST:event_quanLyPhongLabelMouseClicked
 
     private void quanLyCPLabelMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_quanLyCPLabelMouseClicked
         // TODO add your handling code here:
@@ -4217,21 +4317,15 @@ public class MainJframe extends javax.swing.JFrame {
         traPhongMenuMouseClicked(evt);
     }//GEN-LAST:event_quanLyTraPLabelMouseClicked
 
-    private void quanLyPhongLabelMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_quanLyPhongLabelMouseClicked
+    private void quanLyTPLabelMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_quanLyTPLabelMouseClicked
         // TODO add your handling code here:
-        phongMenuMouseClicked(evt);
-    }//GEN-LAST:event_quanLyPhongLabelMouseClicked
+        thuePhongMenuMouseClicked(evt);
+    }//GEN-LAST:event_quanLyTPLabelMouseClicked
 
-    private void quanLyKyLuatLabelMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_quanLyKyLuatLabelMouseClicked
+    private void quanLySVLabelMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_quanLySVLabelMouseClicked
         // TODO add your handling code here:
-        kyLuatMenuMouseClicked(evt);
-    }//GEN-LAST:event_quanLyKyLuatLabelMouseClicked
-
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        // TODO add your handling code here:
-        new FormLoginJframe().setVisible(true);
-        this.dispose();
-    }//GEN-LAST:event_jButton1ActionPerformed
+        sinhVienMenuMouseClicked(evt);
+    }//GEN-LAST:event_quanLySVLabelMouseClicked
 
     /**
      * @param args the command line arguments
@@ -4247,7 +4341,7 @@ public class MainJframe extends javax.swing.JFrame {
     private javax.swing.JButton chonAnhSVButton;
     private javax.swing.JButton chonAnhSVTPButton;
     private javax.swing.JToggleButton chuyenPhongButton;
-    private javax.swing.JMenu chuyenPhongMenu;
+    private javax.swing.JMenuItem chuyenPhongMenu;
     private javax.swing.JPanel chuyenPhongPanel;
     private javax.swing.JButton chuyenPhongSVButton;
     private javax.swing.JTable chuyenPhongTable;
@@ -4272,7 +4366,6 @@ public class MainJframe extends javax.swing.JFrame {
     private javax.swing.JButton jButton6;
     private javax.swing.JButton jButton7;
     private javax.swing.JButton jButton8;
-    private javax.swing.JButton jButton9;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel107;
@@ -4445,6 +4538,9 @@ public class MainJframe extends javax.swing.JFrame {
     private javax.swing.JMenu phongMenu;
     private javax.swing.JPanel phongPanel;
     private javax.swing.JTable phongTable;
+    private javax.swing.JMenu qLPhongMenu;
+    private javax.swing.JMenu qLTaiKhoanMenu;
+    private javax.swing.JButton qLThietBiButton;
     private javax.swing.JLabel quanLyCPLabel;
     private javax.swing.JLabel quanLyKyLuatLabel;
     private javax.swing.JLabel quanLyPhongLabel;
@@ -4482,11 +4578,12 @@ public class MainJframe extends javax.swing.JFrame {
     private javax.swing.JButton themPhongButton;
     private javax.swing.JButton themSVTPButton;
     private javax.swing.JButton thongKeKLButton;
-    private javax.swing.JMenu thuePhongMenu;
+    private javax.swing.JMenu thuTienMenu;
+    private javax.swing.JMenuItem thuePhongMenu;
     private javax.swing.JPanel thuePhongPanel;
     private javax.swing.JTable thuePhongTable;
     private javax.swing.JToggleButton traPhongButton;
-    private javax.swing.JMenu traPhongMenu;
+    private javax.swing.JMenuItem traPhongMenu;
     private javax.swing.JPanel traPhongPanel;
     private javax.swing.JButton traPhongSVButton;
     private javax.swing.JTable traPhongTable;

@@ -30,4 +30,8 @@ public class QuanLyService {
     public QuanLy getQuanLyByMaQL(String maQL) {
         return quanLyDao.getQuanLyByMaQL(maQL);
     }
+    
+    public void insertQL(QuanLy qL) {
+        quanLyDao.insertQuanLy(qL);
+    }
 }

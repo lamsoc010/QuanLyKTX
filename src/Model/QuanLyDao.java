@@ -39,7 +39,7 @@ public class QuanLyDao {
                 qL.setDiaChi(rs.getString(5));
                 qL.setPhuTrach(rs.getString(6));
                 qL.setMatKhau(rs.getString(7));
-                
+                qL.setTrangThai(rs.getString(8));
                 listQuanLys.add(qL);
             }
         } catch (SQLException ex) {
@@ -51,7 +51,7 @@ public class QuanLyDao {
     
     public void updateQuanLy(QuanLy qL) {
         conn = JDBCConnection.getJDBCConnection();
-        String sql = "UPDATE QUANLY SET ANH = ?, HOTEN = ?, SDT = ?, DIACHI = ?, PHUTRACH = ?, MATKHAU = ? WHERE MAQL = ?";
+        String sql = "UPDATE QUANLY SET ANH = ?, HOTEN = ?, SDT = ?, DIACHI = ?, PHUTRACH = ?, MATKHAU = ?, TRANGTHAI = ? WHERE MAQL = ?";
         try {
             PreparedStatement ps = conn.prepareStatement(sql);
             ps.setString(1, qL.getAnh());
@@ -60,7 +60,8 @@ public class QuanLyDao {
             ps.setString(4, qL.getDiaChi());
             ps.setString(5, qL.getPhuTrach());
             ps.setString(6, qL.getMatKhau());
-            ps.setString(7, qL.getMaQL());
+            ps.setString(7, qL.getTrangThai());
+            ps.setString(8, qL.getMaQL());
             
             int rs = ps.executeUpdate();
 
@@ -71,7 +72,7 @@ public class QuanLyDao {
     
     public void insertQuanLy(QuanLy qL) {
         conn = JDBCConnection.getJDBCConnection();
-        String sql = "INSERT INTO QUANLY VALUES (?,?,?,?,?,?,?)";
+        String sql = "INSERT INTO QUANLY VALUES (?,?,?,?,?,?,?,?)";
         try {
             PreparedStatement ps = conn.prepareStatement(sql);
             ps.setString(1, qL.getMaQL());
@@ -81,6 +82,7 @@ public class QuanLyDao {
             ps.setString(5, qL.getDiaChi());
             ps.setString(6, qL.getPhuTrach());
             ps.setString(7, qL.getMatKhau());
+            ps.setString(8, qL.getTrangThai());
             
             int rs = ps.executeUpdate();
         } catch (SQLException ex) {
@@ -104,7 +106,7 @@ public class QuanLyDao {
                 qL.setDiaChi(rs.getString(5));
                 qL.setPhuTrach(rs.getString(6));
                 qL.setMatKhau(rs.getString(7));
-                
+                qL.setTrangThai(rs.getString(8));
                 return qL;
             }
         } catch (SQLException ex) {

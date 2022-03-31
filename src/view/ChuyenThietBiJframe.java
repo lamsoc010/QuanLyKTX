@@ -160,8 +160,15 @@ public class ChuyenThietBiJframe extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
+        jLabel1.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
+        jLabel1.setForeground(new java.awt.Color(0, 0, 102));
+        jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel1.setText("Chuyển Thiết Bị");
 
+        quayLaiButton.setBackground(new java.awt.Color(0, 0, 102));
+        quayLaiButton.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
+        quayLaiButton.setForeground(new java.awt.Color(255, 255, 255));
+        quayLaiButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/Exit.png"))); // NOI18N
         quayLaiButton.setText("Quay Lại");
         quayLaiButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -174,10 +181,9 @@ public class ChuyenThietBiJframe extends javax.swing.JFrame {
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jLabel1)
-                .addGap(180, 180, 180)
-                .addComponent(quayLaiButton, javax.swing.GroupLayout.PREFERRED_SIZE, 102, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(quayLaiButton)
                 .addContainerGap())
         );
         jPanel1Layout.setVerticalGroup(
@@ -187,13 +193,17 @@ public class ChuyenThietBiJframe extends javax.swing.JFrame {
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel1)
                     .addComponent(quayLaiButton))
-                .addContainerGap(19, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
+        jLabel10.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
+        jLabel10.setForeground(new java.awt.Color(0, 0, 102));
         jLabel10.setText("Mã Phiếu:");
 
         maPhieuTF.setEditable(false);
 
+        jLabel11.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
+        jLabel11.setForeground(new java.awt.Color(0, 0, 102));
         jLabel11.setText("Mã Phòng Cũ: ");
 
         maPhongCuCbb.addActionListener(new java.awt.event.ActionListener() {
@@ -202,6 +212,8 @@ public class ChuyenThietBiJframe extends javax.swing.JFrame {
             }
         });
 
+        jLabel12.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
+        jLabel12.setForeground(new java.awt.Color(0, 0, 102));
         jLabel12.setText("Mã TB:");
 
         maTBCbb.addFocusListener(new java.awt.event.FocusAdapter() {
@@ -215,24 +227,40 @@ public class ChuyenThietBiJframe extends javax.swing.JFrame {
             }
         });
 
+        jLabel13.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
+        jLabel13.setForeground(new java.awt.Color(0, 0, 102));
         jLabel13.setText("Tên TB:");
 
+        jLabel14.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
+        jLabel14.setForeground(new java.awt.Color(0, 0, 102));
         jLabel14.setText("Số Lượng:");
 
         soLuongSp.setModel(new javax.swing.SpinnerNumberModel(1, 1, null, 1));
 
+        tenTBTF.setEditable(false);
+
+        jLabel15.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
+        jLabel15.setForeground(new java.awt.Color(0, 0, 102));
         jLabel15.setText("Mã Phòng Mới:");
 
+        jLabel16.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
+        jLabel16.setForeground(new java.awt.Color(0, 0, 102));
         jLabel16.setText("Ngày Chuyển:");
 
         ngayChuyenDC.setDateFormatString("yyyy-MM-dd");
 
+        jLabel17.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
+        jLabel17.setForeground(new java.awt.Color(0, 0, 102));
         jLabel17.setText("Ghi Chú:");
 
         ghiChuTA.setColumns(20);
         ghiChuTA.setRows(5);
         jScrollPane2.setViewportView(ghiChuTA);
 
+        chuyenButton.setBackground(new java.awt.Color(0, 0, 102));
+        chuyenButton.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
+        chuyenButton.setForeground(new java.awt.Color(255, 255, 255));
+        chuyenButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/Tick.png"))); // NOI18N
         chuyenButton.setText("Chuyển");
         chuyenButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -240,6 +268,10 @@ public class ChuyenThietBiJframe extends javax.swing.JFrame {
             }
         });
 
+        refreshButton.setBackground(new java.awt.Color(0, 0, 102));
+        refreshButton.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
+        refreshButton.setForeground(new java.awt.Color(255, 255, 255));
+        refreshButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/Refresh.png"))); // NOI18N
         refreshButton.setText("Refresh");
 
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
@@ -252,7 +284,7 @@ public class ChuyenThietBiJframe extends javax.swing.JFrame {
                     .addGroup(jPanel3Layout.createSequentialGroup()
                         .addComponent(jLabel10)
                         .addGap(41, 41, 41)
-                        .addComponent(maPhieuTF, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(maPhieuTF))
                     .addGroup(jPanel3Layout.createSequentialGroup()
                         .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel11)
@@ -263,27 +295,34 @@ public class ChuyenThietBiJframe extends javax.swing.JFrame {
                             .addComponent(maTBCbb, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                     .addGroup(jPanel3Layout.createSequentialGroup()
                         .addComponent(jLabel15)
-                        .addGap(18, 18, 18)
                         .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(chuyenButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(maPhongMoiCbb, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+                            .addGroup(jPanel3Layout.createSequentialGroup()
+                                .addGap(18, 18, 18)
+                                .addComponent(chuyenButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                            .addGroup(jPanel3Layout.createSequentialGroup()
+                                .addGap(15, 15, 15)
+                                .addComponent(maPhongMoiCbb, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))))
                 .addGap(18, 18, 18)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel3Layout.createSequentialGroup()
                         .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel14)
                             .addComponent(jLabel13))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addGap(31, 31, 31)
                         .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(soLuongSp, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(tenTBTF, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(18, 18, 18)
-                        .addComponent(jLabel17))
+                            .addGroup(jPanel3Layout.createSequentialGroup()
+                                .addComponent(tenTBTF, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 24, Short.MAX_VALUE)
+                                .addComponent(jLabel17)
+                                .addGap(9, 9, 9))
+                            .addGroup(jPanel3Layout.createSequentialGroup()
+                                .addComponent(soLuongSp, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
                     .addGroup(jPanel3Layout.createSequentialGroup()
                         .addComponent(jLabel16)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(ngayChuyenDC, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addGap(18, 18, 18)
+                        .addComponent(ngayChuyenDC, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(refreshButton, javax.swing.GroupLayout.DEFAULT_SIZE, 140, Short.MAX_VALUE)
                     .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE))
@@ -446,8 +485,9 @@ public class ChuyenThietBiJframe extends javax.swing.JFrame {
         Date ngayChuyen = ngayChuyenDC.getDate();
         
 //        Xét tăng giảm số lượng trong phòng mới và phòng cũ
+boolean isTrue = false;
         listQLTB = quanLyThietBiService.getAllQLTBs();
-        listQLTB.forEach(qltb -> {
+        for(QuanLyThietBi qltb : listQLTB) {
 //            Xử lý phòng cũ, nếu số lượng còn lại = 0 thì xoá luôn, còn không thì giảm số lượng
             if(qltb.getMaPhong() == maPhongCu && qltb.getMaTB().equals(maTB)) {
                 if(qltb.getSoLuong() - soLuong == 0) {
@@ -460,6 +500,7 @@ public class ChuyenThietBiJframe extends javax.swing.JFrame {
             }
 //            Xử lý phòng mới, nếu đã có thiết bị đó thì tăng số lượng lên, còn không thì insert mới vào
             if(qltb.getMaPhong() == maPhongMoi) {
+                isTrue = true;
                 if(qltb.getMaTB().equals(maTB)) {
                     qltb.setSoLuong(qltb.getSoLuong() + soLuong);
                     quanLyThietBiService.updateQLTB(qltb);
@@ -468,11 +509,17 @@ public class ChuyenThietBiJframe extends javax.swing.JFrame {
                     quanLyThietBiService.insertQLTB(qLTB);
                 }
             }
-        });
-        
+            
+        };
+//            Nếu phòng đó chưa có thiết bị thì thêm phòng đó vào
+        if(!isTrue) {
+            qLTB = new QuanLyThietBi(maPhongMoi, soLuong, maTB, maQL, "", ngayChuyen, ngayChuyen);
+            quanLyThietBiService.insertQLTB(qLTB);
+        }
         cTB = new ChuyenThietBi(maPhieu, maPhongCu, soLuong, maPhongMoi, maTB, ghiChu, ngayChuyen);
         chuyenThietBiService.insertCTB(cTB);
         JOptionPane.showMessageDialog(rootPane, "Chuyển thiết bị thành công!");
+        setTableCTB();
     }//GEN-LAST:event_chuyenButtonActionPerformed
 
     

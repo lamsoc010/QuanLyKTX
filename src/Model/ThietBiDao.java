@@ -161,10 +161,11 @@ public class ThietBiDao {
     
     public void deleteTB(String maTB) {
         conn = JDBCConnection.getJDBCConnection();
-        String sql = "DETELE THIETBI WHERE MATB = ?";
+        String sql = "DELETE THIETBI WHERE MATB = ?";
         try {
             PreparedStatement ps = conn.prepareStatement(sql);
             ps.setString(1, maTB);
+            int rs = ps.executeUpdate();
         } catch (SQLException ex) {
             ex.printStackTrace();
         }
