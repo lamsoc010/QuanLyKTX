@@ -5,8 +5,11 @@
         <group>
             <file>file:/D:/phanmem/netbeans/Java/QuanLyKTX/src/view/DoiMatKhauJframe.java</file>
             <file>file:/D:/phanmem/netbeans/Java/QuanLyKTX/src/view/TaiKhoanJframe.java</file>
+            <file>file:/D:/phanmem/netbeans/Java/QuanLyKTX/test/Model/QuanLyDaoTest.java</file>
             <file>file:/D:/phanmem/netbeans/Java/QuanLyKTX/src/view/MainJframe.java</file>
             <file>file:/D:/phanmem/netbeans/Java/QuanLyKTX/src/view/FormLoginJframe.java</file>
+            <file>file:/D:/phanmem/netbeans/Java/QuanLyKTX/src/Model/QuanLyDao.java</file>
+            <file>file:/D:/phanmem/netbeans/Java/QuanLyKTX/src/Model/PhongDao.java</file>
         </group>
     </open-files>
 </project-private>

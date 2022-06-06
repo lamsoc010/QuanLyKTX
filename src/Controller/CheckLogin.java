@@ -21,6 +21,13 @@ public class CheckLogin {
         quanLyService = new QuanLyService();
         listQL = quanLyService.getAllQuanLys();
     }
+    
+    public boolean checkNull(String username, String password) {
+        if(username.length() == 0 || password.length() == 0) {
+            return true;
+        }
+        return false;
+    }
 
     public boolean checkUserNameEmpty(String userName) {
         for (QuanLy ql : listQL) {
@@ -38,6 +45,13 @@ public class CheckLogin {
             }
         }
         return null;
+    }
+    
+    public boolean checkPasswordCharator(String passWord) {
+        if(passWord.length() < 8) {
+            return true;
+        }
+        return false;
     }
 
     public boolean checkPassWord(String userName, String passWord) {

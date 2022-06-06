@@ -3203,18 +3203,24 @@ public class MainJframe extends javax.swing.JFrame {
 
     private void suaPhongButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_suaPhongButtonActionPerformed
         // TODO add your handling code here:
-        int confirm = JOptionPane.showConfirmDialog(rootPane, "Bạn có muốn sửa phòng này không?");
-        if (confirm == JOptionPane.YES_OPTION) {
-            p.setMaPhong(Integer.parseInt(maPhongFT.getText()));
-            p.setLoaiPhong(String.valueOf(loaiPhongCbb.getSelectedItem()));
-            int soNguoi = Integer.parseInt(String.valueOf(soNguoiSp.getValue()));
-            p.setSoNguoi(soNguoi);
-            p.setSoGiuong(Integer.parseInt(String.valueOf(soGiuongSp.getValue())));
-            p.setGiaTien(Double.parseDouble(giaTienFT.getText().replace(",", "")));
-            phongService.updatePhong(p);
-            
-            setDataPhong(phongService.getAllPhongs());
-            
+        int row = phongTable.getSelectedRow();
+        if(row == -1) {
+            JOptionPane.showMessageDialog(rootPane, "Vui lòng chọn phòng để sửa!");
+        } else {
+            int confirm = JOptionPane.showConfirmDialog(rootPane, "Bạn có muốn sửa phòng này không?");
+            if (confirm == JOptionPane.YES_OPTION) {
+
+                p.setMaPhong(Integer.parseInt(maPhongFT.getText()));
+                p.setLoaiPhong(String.valueOf(loaiPhongCbb.getSelectedItem()));
+                int soNguoi = Integer.parseInt(String.valueOf(soNguoiSp.getValue()));
+                p.setSoNguoi(soNguoi);
+                p.setSoGiuong(Integer.parseInt(String.valueOf(soGiuongSp.getValue())));
+                p.setGiaTien(Double.parseDouble(giaTienFT.getText().replace(",", "")));
+                phongService.updatePhong(p);
+
+                setDataPhong(phongService.getAllPhongs());
+
+            }
         }
     }//GEN-LAST:event_suaPhongButtonActionPerformed
 

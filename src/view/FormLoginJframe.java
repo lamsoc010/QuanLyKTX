@@ -87,6 +87,11 @@ public class FormLoginJframe extends javax.swing.JFrame {
         jLabel3.setText("Username");
 
         usernameTF.setForeground(new java.awt.Color(0, 0, 102));
+        usernameTF.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                usernameTFActionPerformed(evt);
+            }
+        });
 
         jLabel4.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
         jLabel4.setForeground(new java.awt.Color(0, 0, 102));
@@ -164,10 +169,10 @@ public class FormLoginJframe extends javax.swing.JFrame {
                         .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                             .addGroup(jPanel3Layout.createSequentialGroup()
                                 .addComponent(loginButton, javax.swing.GroupLayout.PREFERRED_SIZE, 105, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 49, Short.MAX_VALUE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                 .addComponent(cancelButton, javax.swing.GroupLayout.PREFERRED_SIZE, 105, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addComponent(usernameTF, javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(passwordPF))
+                            .addComponent(passwordPF, javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(usernameTF, javax.swing.GroupLayout.Alignment.LEADING))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(hideButton, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap())
@@ -208,15 +213,12 @@ public class FormLoginJframe extends javax.swing.JFrame {
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(jScrollPane1)
-                        .addContainerGap())
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(0, 0, Short.MAX_VALUE))))
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 468, Short.MAX_VALUE))
+                .addContainerGap())
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -320,10 +322,14 @@ public class FormLoginJframe extends javax.swing.JFrame {
 //            }
 //        } else 
 //            JOptionPane.showMessageDialog(rootPane, "Nhân viên đã nghỉ việc", "Lỗi", JOptionPane.ERROR_MESSAGE);
-           if(checkLogin.checkUserNameEmpty(userName)) {
+            if(checkLogin.checkNull(userName, passWord)) {
+                JOptionPane.showMessageDialog(rootPane, "Không được để trống", "Lỗi", JOptionPane.ERROR_MESSAGE);
+            }else if(checkLogin.checkUserNameEmpty(userName)) {
                JOptionPane.showMessageDialog(rootPane, "Tài khoản không tồn tại", "Lỗi", JOptionPane.ERROR_MESSAGE);
            } else if(checkLogin.checkUserNameOut(userName) == null) {
                JOptionPane.showMessageDialog(rootPane, "Nhân viên này đã nghỉ", "Lỗi", JOptionPane.ERROR_MESSAGE);
+           } else if(checkLogin.checkPasswordCharator(passWord)) {
+               JOptionPane.showMessageDialog(rootPane, "Mật khẩu không được nhỏ hơn 8 kí tự", "Lỗi", JOptionPane.ERROR_MESSAGE);
            } else if(!checkLogin.checkPassWord(userName, passWord)) {
                JOptionPane.showMessageDialog(rootPane, "Nhập mật khẩu không đúng", "Lỗi", JOptionPane.ERROR_MESSAGE);
            } else {
@@ -351,6 +357,11 @@ public class FormLoginJframe extends javax.swing.JFrame {
             passwordPF.setEchoChar('*');
         }
     }//GEN-LAST:event_hideButtonActionPerformed
+
+    private void usernameTFActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_usernameTFActionPerformed
+        // TODO add your handling code here:
+        loginButtonActionPerformed(evt);
+    }//GEN-LAST:event_usernameTFActionPerformed
 
     /**
      * @param args the command line arguments
